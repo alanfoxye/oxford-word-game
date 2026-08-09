@@ -52,3 +52,6 @@ app.*.map.json
 # User uploaded screenshots
 screenshot_user.png
 user_screenshot_2.png
+
+# APK files - uploaded via Gitee Release API
+releases/*.apk
