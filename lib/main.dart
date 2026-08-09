@@ -783,8 +783,12 @@ class ProfilePage extends StatelessWidget {
     int page = 1;
 
     while (true) {
+      final Map<String, dynamic> params = {'ref': 'master'};
+      if (page > 1) {
+        params['page'] = page.toString();
+      }
       final url = Uri.parse(apiBase).replace(
-        queryParameters: {'ref': 'master', ...page > 1 ? {'page': page.toString()} : null},
+        queryParameters: params,
       );
 
       final response = await http.get(
@@ -808,7 +812,7 @@ class ProfilePage extends StatelessWidget {
       allBytes.addAll(decoded);
 
       // 每页最多 ~10MB，如果不到 10MB 说明是最后一页
-      if (decoded.length < 10_000_000) break;
+      if (decoded.length < 10000000) break;
       page++;
     }
 
