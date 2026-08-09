@@ -1,0 +1,6 @@
+{
+  "version": "1.2.0",
+  "version_name": "v1.2.0 Gitee 更新源",
+  "notes": "## 更新内容\n\n- 🚀 更新源切换到 Gitee，国内访问更快更稳定\n- 🎯 大炮填单词优化：大炮改为从单词正中间升起\n- 🔧 其他细节优化",
+  "apk_url": "https://gitee.com/alanfoxe/oxford-word-game/raw/master/releases/app-v1.2.0.apk"
+}

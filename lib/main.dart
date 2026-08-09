@@ -676,8 +676,8 @@ class ProfilePage extends StatelessWidget {
 
   // 检查更新
   void _checkUpdate(BuildContext context) async {
-    const String currentVersion = '1.1.1';
-    const String repo = 'alanfoxye/oxford-word-game';
+    const String currentVersion = '1.2.0';
+    const String versionUrl = 'https://gitee.com/alanfoxe/oxford-word-game/raw/master/version.json';
 
     // 显示加载对话框
     showDialog(
@@ -696,25 +696,16 @@ class ProfilePage extends StatelessWidget {
 
     try {
       final response = await http.get(
-        Uri.parse('https://api.github.com/repos/$repo/releases/latest'),
+        Uri.parse(versionUrl),
       ).timeout(const Duration(seconds: 10));
 
       Navigator.pop(context); // 关闭加载对话框
 
       if (response.statusCode == 200) {
         final data = jsonDecode(response.body);
-        final latestVersion = (data['tag_name'] as String).replaceAll('v', '');
-        final releaseNotes = data['body'] ?? '暂无更新说明';
-        final assets = data['assets'] as List;
-
-        // 找到 APK 下载地址
-        String? apkUrl;
-        for (var asset in assets) {
-          if (asset['name'].toString().endsWith('.apk')) {
-            apkUrl = asset['browser_download_url'];
-            break;
-          }
-        }
+        final latestVersion = data['version'] as String;
+        final releaseNotes = data['notes'] ?? '暂无更新说明';
+        final apkUrl = data['apk_url'] as String?;
 
         // 比较版本号
         final hasUpdate = _compareVersions(latestVersion, currentVersion) > 0;
