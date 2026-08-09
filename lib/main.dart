@@ -4,7 +4,6 @@ import 'dart:io';
 import 'dart:math';
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
-import 'package:flutter/services.dart';
 import 'package:shared_preferences/shared_preferences.dart';
 import 'package:http/http.dart' as http;
 import 'package:path_provider/path_provider.dart';
@@ -771,7 +770,52 @@ class ProfilePage extends StatelessWidget {
     return 0;
   }
 
-  // 下载并安装 APK
+  // Gitee PAT（用于绕过 WAF 下载大文件）
+  static const _giteePat = '6d2918948733a638447df5e98d3dceaa';
+
+  /// 通过 Gitee Contents API 分页下载大文件（绕过 WAF）
+  Future<List<int>> _downloadFileViaApi(String filePath) async {
+    const owner = 'alanfoxe';
+    const repo = 'oxford-word-game';
+    final apiBase = 'https://gitee.com/api/v5/repos/$owner/$repo/contents/$filePath';
+
+    final allBytes = <int>[];
+    int page = 1;
+
+    while (true) {
+      final url = Uri.parse(apiBase).replace(
+        queryParameters: {'ref': 'master', ...page > 1 ? {'page': page.toString()} : null},
+      );
+
+      final response = await http.get(
+        url,
+        headers: {
+          'Accept': 'application/json',
+          'Authorization': 'token $_giteePat',
+        },
+      ).timeout(const Duration(seconds: 30));
+
+      if (response.statusCode != 200) {
+        throw Exception('API 请求失败: HTTP ${response.statusCode}');
+      }
+
+      final data = jsonDecode(response.body);
+      final content = data['content'] as String?;
+      if (content == null || content.isEmpty) break;
+
+      // base64 解码
+      final decoded = base64Decode(content);
+      allBytes.addAll(decoded);
+
+      // 每页最多 ~10MB，如果不到 10MB 说明是最后一页
+      if (decoded.length < 10_000_000) break;
+      page++;
+    }
+
+    return allBytes;
+  }
+
+  // 下载并安装 APK（通过 Gitee Contents API，绕过 WAF）
   void _downloadAndInstall(BuildContext context, String url, String version) async {
     showDialog(
       context: context,
@@ -788,15 +832,18 @@ class ProfilePage extends StatelessWidget {
     );
 
     try {
-      final response = await http.get(Uri.parse(url)).timeout(const Duration(minutes: 5));
+      // 从 apk_url 中提取文件路径，走 Contents API 下载
+      final filePath = url.split('/raw/').last;
+      final bytes = await _downloadFileViaApi(filePath);
+
       Navigator.pop(context);
 
-      if (response.statusCode == 200) {
+      if (bytes.isNotEmpty) {
         // 保存到临时目录
         final tempDir = await getTemporaryDirectory();
         final apkPath = '${tempDir.path}/oxford_word_game_v$version.apk';
         final file = File(apkPath);
-        await file.writeAsBytes(response.bodyBytes);
+        await file.writeAsBytes(bytes);
 
         // 打开安装
         OpenFilex.open(apkPath);
