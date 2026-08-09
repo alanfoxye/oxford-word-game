@@ -1,9 +1,13 @@
 import 'dart:async';
 import 'dart:convert';
+import 'dart:io';
 import 'dart:math';
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
 import 'package:shared_preferences/shared_preferences.dart';
+import 'package:http/http.dart' as http;
+import 'package:path_provider/path_provider.dart';
+import 'package:open_filex/open_filex.dart';
 
 // 主入口
 void main() async {
@@ -526,6 +530,14 @@ class ProfilePage extends StatelessWidget {
                     ),
                     _buildDivider(),
                     _buildMenuItem(
+                      icon: Icons.system_update_rounded,
+                      title: '检查更新',
+                      subtitle: '检查最新版本',
+                      color: Colors.teal,
+                      onTap: () => _checkUpdate(context),
+                    ),
+                    _buildDivider(),
+                    _buildMenuItem(
                       icon: Icons.info_outline_rounded,
                       title: '关于',
                       subtitle: '版本信息',
@@ -660,6 +672,153 @@ class ProfilePage extends StatelessWidget {
       padding: const EdgeInsets.symmetric(horizontal: 16),
       child: Divider(height: 1, color: Colors.grey[100]),
     );
+  }
+
+  // 检查更新
+  void _checkUpdate(BuildContext context) async {
+    const String currentVersion = '1.0.0';
+    const String repo = 'alanfoxye/oxford-word-game';
+
+    // 显示加载对话框
+    showDialog(
+      context: context,
+      barrierDismissible: false,
+      builder: (context) => const AlertDialog(
+        content: Row(
+          children: [
+            CircularProgressIndicator(),
+            SizedBox(width: 20),
+            Text('正在检查更新...'),
+          ],
+        ),
+      ),
+    );
+
+    try {
+      final response = await http.get(
+        Uri.parse('https://api.github.com/repos/$repo/releases/latest'),
+      ).timeout(const Duration(seconds: 10));
+
+      Navigator.pop(context); // 关闭加载对话框
+
+      if (response.statusCode == 200) {
+        final data = jsonDecode(response.body);
+        final latestVersion = (data['tag_name'] as String).replaceAll('v', '');
+        final releaseNotes = data['body'] ?? '暂无更新说明';
+        final assets = data['assets'] as List;
+
+        // 找到 APK 下载地址
+        String? apkUrl;
+        for (var asset in assets) {
+          if (asset['name'].toString().endsWith('.apk')) {
+            apkUrl = asset['browser_download_url'];
+            break;
+          }
+        }
+
+        // 比较版本号
+        final hasUpdate = _compareVersions(latestVersion, currentVersion) > 0;
+
+        if (hasUpdate && apkUrl != null) {
+          // 有新版本，显示更新对话框
+          showDialog(
+            context: context,
+            builder: (context) => AlertDialog(
+              title: Text('发现新版本 v$latestVersion'),
+              content: Column(
+                mainAxisSize: MainAxisSize.min,
+                crossAxisAlignment: CrossAxisAlignment.start,
+                children: [
+                  const Text('更新内容：', style: TextStyle(fontWeight: FontWeight.bold)),
+                  const SizedBox(height: 8),
+                  Text(releaseNotes),
+                ],
+              ),
+              actions: [
+                TextButton(
+                  onPressed: () => Navigator.pop(context),
+                  child: const Text('取消'),
+                ),
+                ElevatedButton(
+                  onPressed: () {
+                    Navigator.pop(context);
+                    _downloadAndInstall(context, apkUrl!, latestVersion);
+                  },
+                  child: const Text('立即更新'),
+                ),
+              ],
+            ),
+          );
+        } else {
+          // 已是最新版本
+          ScaffoldMessenger.of(context).showSnackBar(
+            const SnackBar(content: Text('已是最新版本！')),
+          );
+        }
+      } else {
+        ScaffoldMessenger.of(context).showSnackBar(
+          const SnackBar(content: Text('检查更新失败，请稍后再试')),
+        );
+      }
+    } catch (e) {
+      Navigator.pop(context); // 关闭加载对话框
+      ScaffoldMessenger.of(context).showSnackBar(
+        SnackBar(content: Text('检查更新失败：$e')),
+      );
+    }
+  }
+
+  // 比较版本号：返回 1 表示 v1 > v2，-1 表示 v1 < v2，0 表示相等
+  int _compareVersions(String v1, String v2) {
+    final parts1 = v1.split('.').map(int.parse).toList();
+    final parts2 = v2.split('.').map(int.parse).toList();
+    for (int i = 0; i < 3; i++) {
+      if (parts1[i] > parts2[i]) return 1;
+      if (parts1[i] < parts2[i]) return -1;
+    }
+    return 0;
+  }
+
+  // 下载并安装 APK
+  void _downloadAndInstall(BuildContext context, String url, String version) async {
+    showDialog(
+      context: context,
+      barrierDismissible: false,
+      builder: (context) => const AlertDialog(
+        content: Row(
+          children: [
+            CircularProgressIndicator(),
+            SizedBox(width: 20),
+            Text('正在下载更新包...'),
+          ],
+        ),
+      ),
+    );
+
+    try {
+      final response = await http.get(Uri.parse(url)).timeout(const Duration(minutes: 5));
+      Navigator.pop(context);
+
+      if (response.statusCode == 200) {
+        // 保存到临时目录
+        final tempDir = await getTemporaryDirectory();
+        final apkPath = '${tempDir.path}/oxford_word_game_v$version.apk';
+        final file = File(apkPath);
+        await file.writeAsBytes(response.bodyBytes);
+
+        // 打开安装
+        OpenFilex.open(apkPath);
+      } else {
+        ScaffoldMessenger.of(context).showSnackBar(
+          const SnackBar(content: Text('下载失败，请稍后再试')),
+        );
+      }
+    } catch (e) {
+      Navigator.pop(context);
+      ScaffoldMessenger.of(context).showSnackBar(
+        SnackBar(content: Text('下载失败：$e')),
+      );
+    }
   }
 }
 
