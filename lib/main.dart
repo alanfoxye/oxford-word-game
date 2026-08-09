@@ -676,7 +676,7 @@ class ProfilePage extends StatelessWidget {
 
   // 检查更新
   void _checkUpdate(BuildContext context) async {
-    const String currentVersion = '1.2.0';
+    const String currentVersion = '1.2.1';
     const String versionUrl = 'https://gitee.com/alanfoxe/oxford-word-game/raw/master/version.json';
 
     // 显示加载对话框
