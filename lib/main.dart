@@ -277,6 +277,15 @@ class LearningStats {
   int maxStreak = 0;        // 最高连击
   List<Word> wrongWords = []; // 错题本（去重）
   String avatarPath = '';   // 头像本地路径
+  String nickname = '';      // 用户昵称（空表示使用默认）
+
+  // 设置项
+  bool soundEnabled = true;   // 音效开关
+  bool vibrationEnabled = true; // 震动开关
+  double ttsSpeechRate = 0.5;  // TTS 语速
+
+  // 学习记录（按日期存储）
+  Map<String, Map<String, int>> dailyRecords = {}; // key: 日期(yyyy-MM-dd), value: {questions, correct, score, time}
 
   // 初始化，从本地加载数据
   Future<void> init() async {
@@ -297,6 +306,29 @@ class LearningStats {
     // 加载头像路径
     avatarPath = _prefs!.getString('avatarPath') ?? '';
 
+    // 加载昵称
+    nickname = _prefs!.getString('nickname') ?? '';
+
+    // 加载设置
+    soundEnabled = _prefs!.getBool('soundEnabled') ?? true;
+    vibrationEnabled = _prefs!.getBool('vibrationEnabled') ?? true;
+    ttsSpeechRate = _prefs!.getDouble('ttsSpeechRate') ?? 0.5;
+
+    // 加载学习记录
+    final recordsJson = _prefs!.getString('dailyRecords');
+    if (recordsJson != null) {
+      final Map<String, dynamic> map = jsonDecode(recordsJson);
+      dailyRecords = map.map((key, value) {
+        final v = value as Map<String, dynamic>;
+        return MapEntry(key, {
+          'questions': v['questions'] as int,
+          'correct': v['correct'] as int,
+          'score': v['score'] as int,
+          'time': v['time'] as int,
+        });
+      });
+    }
+
     _initialized = true;
   }
 
@@ -305,6 +337,13 @@ class LearningStats {
     if (_prefs == null) return;
     avatarPath = path;
     await _prefs!.setString('avatarPath', path);
+  }
+
+  // 保存昵称
+  Future<void> saveNickname(String name) async {
+    if (_prefs == null) return;
+    nickname = name;
+    await _prefs!.setString('nickname', name);
   }
 
   // 保存到本地
@@ -321,6 +360,88 @@ class LearningStats {
       'meaning': w.meaning,
     }).toList());
     _prefs!.setString('wrongWords', wrongWordsJson);
+
+    // 保存设置
+    _prefs!.setBool('soundEnabled', soundEnabled);
+    _prefs!.setBool('vibrationEnabled', vibrationEnabled);
+    _prefs!.setDouble('ttsSpeechRate', ttsSpeechRate);
+
+    // 保存学习记录（只保留最近30天）
+    final sortedKeys = dailyRecords.keys.toList()..sort((a, b) => b.compareTo(a));
+    if (sortedKeys.length > 30) {
+      final keysToRemove = sortedKeys.sublist(30);
+      for (final key in keysToRemove) {
+        dailyRecords.remove(key);
+      }
+    }
+    final recordsJson = jsonEncode(dailyRecords.map((key, value) {
+      return MapEntry(key, value);
+    }));
+    _prefs!.setString('dailyRecords', recordsJson);
+  }
+
+  // 记录今日学习数据
+  void recordStudy({required bool correct, required int score}) {
+    final today = _getTodayKey();
+    final record = dailyRecords.putIfAbsent(today, () => {
+      'questions': 0,
+      'correct': 0,
+      'score': 0,
+      'time': 0,
+    });
+    record['questions'] = (record['questions'] ?? 0) + 1;
+    if (correct) {
+      record['correct'] = (record['correct'] ?? 0) + 1;
+    }
+    record['score'] = (record['score'] ?? 0) + score;
+    _save();
+  }
+
+  // 获取今天的日期 key
+  String _getTodayKey() {
+    final now = DateTime.now();
+    return '${now.year.toString().padLeft(4, '0')}-${now.month.toString().padLeft(2, '0')}-${now.day.toString().padLeft(2, '0')}';
+  }
+
+  // 获取最近 N 天的记录
+  List<Map<String, dynamic>> getRecentRecords(int days) {
+    final result = <Map<String, dynamic>>[];
+    final now = DateTime.now();
+    for (int i = 0; i < days; i++) {
+      final date = now.subtract(Duration(days: i));
+      final key = '${date.year.toString().padLeft(4, '0')}-${date.month.toString().padLeft(2, '0')}-${date.day.toString().padLeft(2, '0')}';
+      final record = dailyRecords[key];
+      result.add({
+        'date': key,
+        'displayDate': '${date.month}/${date.day}',
+        'weekday': _getWeekday(date.weekday),
+        'questions': record?['questions'] ?? 0,
+        'correct': record?['correct'] ?? 0,
+        'score': record?['score'] ?? 0,
+        'accuracy': record != null && record['questions']! > 0
+            ? (record['correct']! / record['questions']!)
+            : 0.0,
+      });
+    }
+    return result.reversed.toList();
+  }
+
+  // 获取星期几
+  String _getWeekday(int weekday) {
+    const weekdays = ['一', '二', '三', '四', '五', '六', '日'];
+    return '周$weekdays[weekday - 1]';
+  }
+
+  // 更新设置
+  void updateSettings({
+    bool? soundEnabled,
+    bool? vibrationEnabled,
+    double? ttsSpeechRate,
+  }) {
+    if (soundEnabled != null) this.soundEnabled = soundEnabled;
+    if (vibrationEnabled != null) this.vibrationEnabled = vibrationEnabled;
+    if (ttsSpeechRate != null) this.ttsSpeechRate = ttsSpeechRate;
+    _save();
   }
 
   // 答对了
@@ -331,6 +452,7 @@ class LearningStats {
     if (currentStreak > maxStreak) {
       maxStreak = currentStreak;
     }
+    recordStudy(correct: true, score: score);
     _save();
   }
 
@@ -341,6 +463,7 @@ class LearningStats {
     if (!wrongWords.any((w) => w.word == word.word)) {
       wrongWords.add(word);
     }
+    recordStudy(correct: false, score: 0);
     _save();
   }
 
@@ -422,20 +545,26 @@ class ProfilePage extends StatefulWidget {
 
 class _ProfilePageState extends State<ProfilePage> {
   String? _avatarPath;
+  String _nickname = '小小学霸';
   final ImagePicker _picker = ImagePicker();
 
   @override
   void initState() {
     super.initState();
-    _loadAvatar();
+    _loadProfile();
   }
 
-  // 加载头像
-  Future<void> _loadAvatar() async {
+  // 加载头像和昵称
+  Future<void> _loadProfile() async {
     final stats = LearningStats();
     if (stats.avatarPath.isNotEmpty) {
       setState(() {
         _avatarPath = stats.avatarPath;
+      });
+    }
+    if (stats.nickname.isNotEmpty) {
+      setState(() {
+        _nickname = stats.nickname;
       });
     }
   }
@@ -480,6 +609,48 @@ class _ProfilePageState extends State<ProfilePage> {
         );
       }
     }
+  }
+
+  // 修改昵称
+  void _editNickname(BuildContext context) {
+    final controller = TextEditingController(text: _nickname.isEmpty ? '小小学霸' : _nickname);
+    showDialog(
+      context: context,
+      builder: (context) => AlertDialog(
+        title: const Text('修改昵称'),
+        content: TextField(
+          controller: controller,
+          decoration: const InputDecoration(
+            hintText: '请输入昵称',
+            border: OutlineInputBorder(),
+          ),
+          autofocus: true,
+          maxLength: 20,
+        ),
+        actions: [
+          TextButton(
+            onPressed: () => Navigator.pop(context),
+            child: const Text('取消'),
+          ),
+          ElevatedButton(
+            onPressed: () {
+              final newNickname = controller.text.trim();
+              if (newNickname.isNotEmpty) {
+                setState(() {
+                  _nickname = newNickname;
+                });
+                LearningStats().saveNickname(newNickname);
+                Navigator.pop(context);
+                ScaffoldMessenger.of(context).showSnackBar(
+                  const SnackBar(content: Text('✅ 昵称已更新！')),
+                );
+              }
+            },
+            child: const Text('保存'),
+          ),
+        ],
+      ),
+    );
   }
 
   // 获取等级信息
@@ -578,13 +749,27 @@ class _ProfilePageState extends State<ProfilePage> {
                     ),
                   ),
                   const SizedBox(height: 12),
-                  // 昵称
-                  const Text(
-                    '小小学霸',
-                    style: TextStyle(
-                      fontSize: 24,
-                      fontWeight: FontWeight.bold,
-                      color: Colors.white,
+                  // 昵称 - 可点击修改
+                  InkWell(
+                    onTap: () => _editNickname(context),
+                    child: Row(
+                      mainAxisSize: MainAxisSize.min,
+                      children: [
+                        Text(
+                          _nickname.isEmpty ? '小小学霸' : _nickname,
+                          style: const TextStyle(
+                            fontSize: 24,
+                            fontWeight: FontWeight.bold,
+                            color: Colors.white,
+                          ),
+                        ),
+                        const SizedBox(width: 8),
+                        const Icon(
+                          Icons.edit_rounded,
+                          color: Colors.white70,
+                          size: 20,
+                        ),
+                      ],
                     ),
                   ),
                   const SizedBox(height: 8),
@@ -728,8 +913,11 @@ class _ProfilePageState extends State<ProfilePage> {
                       subtitle: '查看历史学习数据',
                       color: Colors.blue,
                       onTap: () {
-                        ScaffoldMessenger.of(context).showSnackBar(
-                          const SnackBar(content: Text('学习记录功能开发中...')),
+                        Navigator.push(
+                          context,
+                          MaterialPageRoute(
+                            builder: (context) => const StudyRecordsPage(),
+                          ),
                         );
                       },
                     ),
@@ -737,11 +925,14 @@ class _ProfilePageState extends State<ProfilePage> {
                     _buildMenuItem(
                       icon: Icons.settings_rounded,
                       title: '设置',
-                      subtitle: '音效、震动等设置',
+                      subtitle: '音效、震动、发音等设置',
                       color: Colors.grey,
                       onTap: () {
-                        ScaffoldMessenger.of(context).showSnackBar(
-                          const SnackBar(content: Text('设置功能开发中...')),
+                        Navigator.push(
+                          context,
+                          MaterialPageRoute(
+                            builder: (context) => const SettingsPage(),
+                          ),
                         );
                       },
                     ),
@@ -893,7 +1084,7 @@ class _ProfilePageState extends State<ProfilePage> {
 
   // 检查更新
   void _checkUpdate(BuildContext context) async {
-    const String currentVersion = '1.3.1';
+    const String currentVersion = '1.3.2';
     const String versionUrl = 'https://gitee.com/alanfoxe/oxford-word-game/raw/master/version.json';
 
     // 显示加载对话框
@@ -987,92 +1178,93 @@ class _ProfilePageState extends State<ProfilePage> {
     return 0;
   }
 
-  // Gitee PAT（用于绕过 WAF 下载大文件）
-  static const _giteePat = '6d2918948733a638447df5e98d3dceaa';
-
-  /// 通过 Gitee Contents API 分页下载大文件（绕过 WAF）
-  Future<List<int>> _downloadFileViaApi(String filePath) async {
-    const owner = 'alanfoxe';
-    const repo = 'oxford-word-game';
-    final apiBase = 'https://gitee.com/api/v5/repos/$owner/$repo/contents/$filePath';
-
-    final allBytes = <int>[];
-    int page = 1;
-
-    while (true) {
-      final Map<String, dynamic> params = {'ref': 'master'};
-      if (page > 1) {
-        params['page'] = page.toString();
-      }
-      final url = Uri.parse(apiBase).replace(
-        queryParameters: params,
-      );
-
-      final response = await http.get(
-        url,
-        headers: {
-          'Accept': 'application/json',
-          'Authorization': 'token $_giteePat',
-        },
-      ).timeout(const Duration(seconds: 30));
-
-      if (response.statusCode != 200) {
-        throw Exception('API 请求失败: HTTP ${response.statusCode}');
-      }
-
-      final data = jsonDecode(response.body);
-      final content = data['content'] as String?;
-      if (content == null || content.isEmpty) break;
-
-      // base64 解码
-      final decoded = base64Decode(content);
-      allBytes.addAll(decoded);
-
-      // 每页最多 ~10MB，如果不到 10MB 说明是最后一页
-      if (decoded.length < 10000000) break;
-      page++;
-    }
-
-    return allBytes;
-  }
-
-  // 下载并安装 APK（通过 Gitee Contents API，绕过 WAF）
+  // 下载并安装 APK
   void _downloadAndInstall(BuildContext context, String url, String version) async {
+    ValueNotifier<double> progress = ValueNotifier(0.0);
+    ValueNotifier<String> progressText = ValueNotifier('0%');
+
     showDialog(
       context: context,
       barrierDismissible: false,
-      builder: (context) => const AlertDialog(
-        content: Row(
+      builder: (context) => AlertDialog(
+        title: const Text('正在下载更新包'),
+        content: Column(
+          mainAxisSize: MainAxisSize.min,
           children: [
-            CircularProgressIndicator(),
-            SizedBox(width: 20),
-            Text('正在下载更新包...'),
+            ValueListenableBuilder<double>(
+              valueListenable: progress,
+              builder: (context, value, child) {
+                return LinearProgressIndicator(
+                  value: value > 0 ? value : null,
+                  minHeight: 8,
+                  borderRadius: BorderRadius.circular(4),
+                );
+              },
+            ),
+            const SizedBox(height: 12),
+            ValueListenableBuilder<String>(
+              valueListenable: progressText,
+              builder: (context, text, child) {
+                return Text(
+                  text,
+                  style: const TextStyle(fontSize: 14, color: Colors.grey),
+                );
+              },
+            ),
           ],
         ),
       ),
     );
 
     try {
-      // 从 apk_url 中提取文件路径，走 Contents API 下载
-      final filePath = url.split('/raw/').last;
-      final bytes = await _downloadFileViaApi(filePath);
+      final client = http.Client();
+      final request = http.Request('GET', Uri.parse(url));
+      final response = await client.send(request).timeout(const Duration(seconds: 120));
 
-      Navigator.pop(context);
+      if (response.statusCode == 200) {
+        final totalBytes = response.contentLength ?? 0;
+        final bytes = <int>[];
+        int received = 0;
 
-      if (bytes.isNotEmpty) {
-        // 保存到临时目录
-        final tempDir = await getTemporaryDirectory();
-        final apkPath = '${tempDir.path}/oxford_word_game_v$version.apk';
-        final file = File(apkPath);
-        await file.writeAsBytes(bytes);
+        await response.stream.listen(
+          (chunk) {
+            bytes.addAll(chunk);
+            received += chunk.length;
+            if (totalBytes > 0) {
+              progress.value = received / totalBytes;
+              final percent = (progress.value * 100).toStringAsFixed(0);
+              final kbReceived = (received / 1024).toStringAsFixed(0);
+              final kbTotal = (totalBytes / 1024).toStringAsFixed(0);
+              progressText.value = '$percent% ($kbReceived / $kbTotal KB)';
+            } else {
+              progressText.value = '${(received / 1024).toStringAsFixed(0)} KB';
+            }
+          },
+        ).asFuture();
 
-        // 打开安装
-        OpenFilex.open(apkPath);
+        Navigator.pop(context);
+
+        if (bytes.isNotEmpty) {
+          // 保存到临时目录
+          final tempDir = await getTemporaryDirectory();
+          final apkPath = '${tempDir.path}/oxford_word_game_v$version.apk';
+          final file = File(apkPath);
+          await file.writeAsBytes(bytes);
+
+          // 打开安装
+          OpenFilex.open(apkPath);
+        } else {
+          ScaffoldMessenger.of(context).showSnackBar(
+            const SnackBar(content: Text('下载失败，请稍后再试')),
+          );
+        }
       } else {
+        Navigator.pop(context);
         ScaffoldMessenger.of(context).showSnackBar(
-          const SnackBar(content: Text('下载失败，请稍后再试')),
+          SnackBar(content: Text('下载失败：HTTP ${response.statusCode}')),
         );
       }
+      client.close();
     } catch (e) {
       Navigator.pop(context);
       ScaffoldMessenger.of(context).showSnackBar(
@@ -1095,7 +1287,10 @@ class _WrongWordsPageState extends State<WrongWordsPage> {
 
   Future<void> _speakWord(String word) async {
     try {
-      await platform.invokeMethod('speak', {'text': word});
+      await platform.invokeMethod('speak', {
+        'text': word,
+        'rate': LearningStats().ttsSpeechRate,
+      });
     } catch (e) {
       // 忽略 TTS 错误
     }
@@ -1190,6 +1385,556 @@ class _WrongWordsPageState extends State<WrongWordsPage> {
                   );
                 },
               ),
+      ),
+    );
+  }
+}
+
+// 学习记录页面
+class StudyRecordsPage extends StatelessWidget {
+  const StudyRecordsPage({super.key});
+
+  @override
+  Widget build(BuildContext context) {
+    final stats = LearningStats();
+    final recentRecords = stats.getRecentRecords(7);
+
+    // 计算统计数据
+    int totalDays = stats.dailyRecords.length;
+    int totalQuestions = 0;
+    int totalCorrect = 0;
+    int totalScore = 0;
+    for (final record in stats.dailyRecords.values) {
+      totalQuestions += record['questions'] ?? 0;
+      totalCorrect += record['correct'] ?? 0;
+      totalScore += record['score'] ?? 0;
+    }
+    final avgAccuracy = totalQuestions > 0 ? (totalCorrect / totalQuestions * 100).toStringAsFixed(0) : '0';
+
+    // 找出最大答题数，用于柱状图比例
+    int maxQuestions = 1;
+    for (final r in recentRecords) {
+      if (r['questions'] > maxQuestions) {
+        maxQuestions = r['questions'];
+      }
+    }
+
+    return Scaffold(
+      appBar: AppBar(
+        title: const Text('学习记录'),
+        backgroundColor: const Color(0xFF6C63FF),
+        elevation: 0,
+      ),
+      body: SingleChildScrollView(
+        padding: const EdgeInsets.all(16),
+        child: Column(
+          crossAxisAlignment: CrossAxisAlignment.start,
+          children: [
+            // 统计概览
+            const Text(
+              '📊 学习概览',
+              style: TextStyle(fontSize: 20, fontWeight: FontWeight.bold),
+            ),
+            const SizedBox(height: 16),
+            Row(
+              children: [
+                Expanded(
+                  child: _buildStatCard(
+                    icon: Icons.calendar_today_rounded,
+                    title: '学习天数',
+                    value: '$totalDays 天',
+                    color: Colors.blue,
+                  ),
+                ),
+                const SizedBox(width: 12),
+                Expanded(
+                  child: _buildStatCard(
+                    icon: Icons.quiz_rounded,
+                    title: '总答题数',
+                    value: '$totalQuestions 题',
+                    color: Colors.orange,
+                  ),
+                ),
+              ],
+            ),
+            const SizedBox(height: 12),
+            Row(
+              children: [
+                Expanded(
+                  child: _buildStatCard(
+                    icon: Icons.verified_rounded,
+                    title: '平均正确率',
+                    value: '$avgAccuracy%',
+                    color: Colors.green,
+                  ),
+                ),
+                const SizedBox(width: 12),
+                Expanded(
+                  child: _buildStatCard(
+                    icon: Icons.star_rounded,
+                    title: '总得分',
+                    value: '$totalScore 分',
+                    color: Colors.purple,
+                  ),
+                ),
+              ],
+            ),
+            const SizedBox(height: 24),
+
+            // 最近7天趋势
+            const Text(
+              '📈 最近7天趋势',
+              style: TextStyle(fontSize: 20, fontWeight: FontWeight.bold),
+            ),
+            const SizedBox(height: 16),
+            Container(
+              padding: const EdgeInsets.all(16),
+              decoration: BoxDecoration(
+                color: Colors.white,
+                borderRadius: BorderRadius.circular(16),
+                boxShadow: [
+                  BoxShadow(
+                    color: Colors.grey.withOpacity(0.1),
+                    blurRadius: 10,
+                    offset: const Offset(0, 2),
+                  ),
+                ],
+              ),
+              child: Column(
+                children: [
+                  SizedBox(
+                    height: 150,
+                    child: Row(
+                      crossAxisAlignment: CrossAxisAlignment.end,
+                      mainAxisAlignment: MainAxisAlignment.spaceAround,
+                      children: recentRecords.map((r) {
+                        final height = (r['questions'] / maxQuestions) * 120;
+                        return Column(
+                          mainAxisAlignment: MainAxisAlignment.end,
+                          children: [
+                            Text(
+                              '${r['questions']}',
+                              style: const TextStyle(
+                                fontSize: 12,
+                                fontWeight: FontWeight.bold,
+                                color: Color(0xFF6C63FF),
+                              ),
+                            ),
+                            const SizedBox(height: 4),
+                            Container(
+                              width: 24,
+                              height: height > 0 ? height : 2,
+                              decoration: BoxDecoration(
+                                color: const Color(0xFF6C63FF).withOpacity(0.8),
+                                borderRadius: BorderRadius.circular(4),
+                              ),
+                            ),
+                            const SizedBox(height: 8),
+                            Text(
+                              r['displayDate'],
+                              style: const TextStyle(fontSize: 11, color: Colors.grey),
+                            ),
+                          ],
+                        );
+                      }).toList(),
+                    ),
+                  ),
+                ],
+              ),
+            ),
+            const SizedBox(height: 24),
+
+            // 详细记录
+            const Text(
+              '📋 详细记录',
+              style: TextStyle(fontSize: 20, fontWeight: FontWeight.bold),
+            ),
+            const SizedBox(height: 16),
+            ...recentRecords.reversed.map((r) {
+              return Container(
+                margin: const EdgeInsets.only(bottom: 8),
+                padding: const EdgeInsets.all(16),
+                decoration: BoxDecoration(
+                  color: Colors.white,
+                  borderRadius: BorderRadius.circular(12),
+                  boxShadow: [
+                    BoxShadow(
+                      color: Colors.grey.withOpacity(0.05),
+                      blurRadius: 5,
+                      offset: const Offset(0, 1),
+                    ),
+                  ],
+                ),
+                child: Row(
+                  children: [
+                    Container(
+                      width: 48,
+                      height: 48,
+                      decoration: BoxDecoration(
+                        color: const Color(0xFF6C63FF).withOpacity(0.1),
+                        borderRadius: BorderRadius.circular(12),
+                      ),
+                      child: const Icon(
+                        Icons.assignment_turned_in_rounded,
+                        color: Color(0xFF6C63FF),
+                      ),
+                    ),
+                    const SizedBox(width: 12),
+                    Expanded(
+                      child: Column(
+                        crossAxisAlignment: CrossAxisAlignment.start,
+                        children: [
+                          Text(
+                            '${r['date']} ${r['weekday']}',
+                            style: const TextStyle(
+                              fontSize: 16,
+                              fontWeight: FontWeight.bold,
+                            ),
+                          ),
+                          const SizedBox(height: 4),
+                          Text(
+                            '答题 ${r['questions']} 道，正确 ${r['correct']} 道',
+                            style: const TextStyle(fontSize: 13, color: Colors.grey),
+                          ),
+                        ],
+                      ),
+                    ),
+                    Column(
+                      crossAxisAlignment: CrossAxisAlignment.end,
+                      children: [
+                        Text(
+                          '+${r['score']} 分',
+                          style: const TextStyle(
+                            fontSize: 16,
+                            fontWeight: FontWeight.bold,
+                            color: Colors.orange,
+                          ),
+                        ),
+                        const SizedBox(height: 4),
+                        Text(
+                          '正确率 ${(r['accuracy'] * 100).toStringAsFixed(0)}%',
+                          style: const TextStyle(fontSize: 12, color: Colors.grey),
+                        ),
+                      ],
+                    ),
+                  ],
+                ),
+              );
+            }).toList(),
+
+            if (stats.dailyRecords.isEmpty)
+              Container(
+                padding: const EdgeInsets.all(40),
+                child: const Column(
+                  children: [
+                    Icon(Icons.history_rounded, size: 64, color: Colors.grey),
+                    SizedBox(height: 16),
+                    Text(
+                      '还没有学习记录',
+                      style: TextStyle(fontSize: 16, color: Colors.grey),
+                    ),
+                    SizedBox(height: 8),
+                    Text(
+                      '快去背单词吧！',
+                      style: TextStyle(fontSize: 14, color: Colors.grey),
+                    ),
+                  ],
+                ),
+              ),
+          ],
+        ),
+      ),
+    );
+  }
+
+  Widget _buildStatCard({
+    required IconData icon,
+    required String title,
+    required String value,
+    required Color color,
+  }) {
+    return Container(
+      padding: const EdgeInsets.all(16),
+      decoration: BoxDecoration(
+        color: Colors.white,
+        borderRadius: BorderRadius.circular(16),
+        boxShadow: [
+          BoxShadow(
+            color: Colors.grey.withOpacity(0.1),
+            blurRadius: 10,
+            offset: const Offset(0, 2),
+          ),
+        ],
+      ),
+      child: Column(
+        crossAxisAlignment: CrossAxisAlignment.start,
+        children: [
+          Container(
+            width: 40,
+            height: 40,
+            decoration: BoxDecoration(
+              color: color.withOpacity(0.1),
+              borderRadius: BorderRadius.circular(10),
+            ),
+            child: Icon(icon, color: color, size: 24),
+          ),
+          const SizedBox(height: 12),
+          Text(
+            value,
+            style: const TextStyle(
+              fontSize: 22,
+              fontWeight: FontWeight.bold,
+            ),
+          ),
+          const SizedBox(height: 4),
+          Text(
+            title,
+            style: const TextStyle(fontSize: 13, color: Colors.grey),
+          ),
+        ],
+      ),
+    );
+  }
+}
+
+// 设置页面
+class SettingsPage extends StatefulWidget {
+  const SettingsPage({super.key});
+
+  @override
+  State<SettingsPage> createState() => _SettingsPageState();
+}
+
+class _SettingsPageState extends State<SettingsPage> {
+  late bool _soundEnabled;
+  late bool _vibrationEnabled;
+  late double _ttsSpeechRate;
+
+  @override
+  void initState() {
+    super.initState();
+    final stats = LearningStats();
+    _soundEnabled = stats.soundEnabled;
+    _vibrationEnabled = stats.vibrationEnabled;
+    _ttsSpeechRate = stats.ttsSpeechRate;
+  }
+
+  @override
+  Widget build(BuildContext context) {
+    return Scaffold(
+      appBar: AppBar(
+        title: const Text('设置'),
+        backgroundColor: const Color(0xFF6C63FF),
+        elevation: 0,
+      ),
+      body: ListView(
+        padding: const EdgeInsets.all(16),
+        children: [
+          // 音效设置
+          _buildSectionTitle('🔊 音效与震动'),
+          const SizedBox(height: 8),
+          Container(
+            decoration: BoxDecoration(
+              color: Colors.white,
+              borderRadius: BorderRadius.circular(16),
+              boxShadow: [
+                BoxShadow(
+                  color: Colors.grey.withOpacity(0.1),
+                  blurRadius: 10,
+                  offset: const Offset(0, 2),
+                ),
+              ],
+            ),
+            child: Column(
+              children: [
+                SwitchListTile(
+                  title: const Text('音效'),
+                  subtitle: const Text('答题时播放音效'),
+                  value: _soundEnabled,
+                  activeColor: const Color(0xFF6C63FF),
+                  onChanged: (value) {
+                    setState(() {
+                      _soundEnabled = value;
+                    });
+                    LearningStats().updateSettings(soundEnabled: value);
+                  },
+                ),
+                const Divider(height: 1),
+                SwitchListTile(
+                  title: const Text('震动'),
+                  subtitle: const Text('答题时震动反馈'),
+                  value: _vibrationEnabled,
+                  activeColor: const Color(0xFF6C63FF),
+                  onChanged: (value) {
+                    setState(() {
+                      _vibrationEnabled = value;
+                    });
+                    LearningStats().updateSettings(vibrationEnabled: value);
+                  },
+                ),
+              ],
+            ),
+          ),
+          const SizedBox(height: 24),
+
+          // 发音设置
+          _buildSectionTitle('🗣️ 单词发音'),
+          const SizedBox(height: 8),
+          Container(
+            padding: const EdgeInsets.all(16),
+            decoration: BoxDecoration(
+              color: Colors.white,
+              borderRadius: BorderRadius.circular(16),
+              boxShadow: [
+                BoxShadow(
+                  color: Colors.grey.withOpacity(0.1),
+                  blurRadius: 10,
+                  offset: const Offset(0, 2),
+                ),
+              ],
+            ),
+            child: Column(
+              crossAxisAlignment: CrossAxisAlignment.start,
+              children: [
+                const Text(
+                  '语速',
+                  style: TextStyle(fontSize: 16, fontWeight: FontWeight.w500),
+                ),
+                const SizedBox(height: 8),
+                Slider(
+                  value: _ttsSpeechRate,
+                  min: 0.3,
+                  max: 1.0,
+                  divisions: 7,
+                  activeColor: const Color(0xFF6C63FF),
+                  label: '${_ttsSpeechRate.toStringAsFixed(1)}x',
+                  onChanged: (value) {
+                    setState(() {
+                      _ttsSpeechRate = value;
+                    });
+                    LearningStats().updateSettings(ttsSpeechRate: value);
+                  },
+                ),
+                Row(
+                  mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                  children: const [
+                    Text('慢', style: TextStyle(fontSize: 12, color: Colors.grey)),
+                    Text('正常', style: TextStyle(fontSize: 12, color: Colors.grey)),
+                    Text('快', style: TextStyle(fontSize: 12, color: Colors.grey)),
+                  ],
+                ),
+              ],
+            ),
+          ),
+          const SizedBox(height: 24),
+
+          // 数据管理
+          _buildSectionTitle('📦 数据管理'),
+          const SizedBox(height: 8),
+          Container(
+            decoration: BoxDecoration(
+              color: Colors.white,
+              borderRadius: BorderRadius.circular(16),
+              boxShadow: [
+                BoxShadow(
+                  color: Colors.grey.withOpacity(0.1),
+                  blurRadius: 10,
+                  offset: const Offset(0, 2),
+                ),
+              ],
+            ),
+            child: Column(
+              children: [
+                ListTile(
+                  leading: const Icon(Icons.delete_outline_rounded, color: Colors.red),
+                  title: const Text('清除学习数据'),
+                  subtitle: const Text('清除所有统计和错题本'),
+                  trailing: const Icon(Icons.chevron_right_rounded, color: Colors.grey),
+                  onTap: () => _showClearConfirmDialog(context),
+                ),
+              ],
+            ),
+          ),
+          const SizedBox(height: 24),
+
+          // 关于
+          _buildSectionTitle('ℹ️ 关于'),
+          const SizedBox(height: 8),
+          Container(
+            decoration: BoxDecoration(
+              color: Colors.white,
+              borderRadius: BorderRadius.circular(16),
+              boxShadow: [
+                BoxShadow(
+                  color: Colors.grey.withOpacity(0.1),
+                  blurRadius: 10,
+                  offset: const Offset(0, 2),
+                ),
+              ],
+            ),
+            child: const Column(
+              children: [
+                ListTile(
+                  leading: Icon(Icons.info_outline_rounded, color: Colors.purple),
+                  title: Text('版本'),
+                  trailing: Text(
+                    'v1.3.2',
+                    style: TextStyle(color: Colors.grey),
+                  ),
+                ),
+                Divider(height: 1),
+                ListTile(
+                  leading: Icon(Icons.favorite_rounded, color: Colors.pink),
+                  title: Text('专为大双小双打造'),
+                  subtitle: Text('沪教牛津版小学英语词汇'),
+                ),
+              ],
+            ),
+          ),
+        ],
+      ),
+    );
+  }
+
+  Widget _buildSectionTitle(String title) {
+    return Padding(
+      padding: const EdgeInsets.symmetric(horizontal: 4),
+      child: Text(
+        title,
+        style: const TextStyle(
+          fontSize: 18,
+          fontWeight: FontWeight.bold,
+        ),
+      ),
+    );
+  }
+
+  // 清除数据确认对话框
+  void _showClearConfirmDialog(BuildContext context) {
+    showDialog(
+      context: context,
+      builder: (context) => AlertDialog(
+        title: const Text('确认清除？'),
+        content: const Text('这将清除所有学习数据，包括得分、统计和错题本，且无法恢复。确定要继续吗？'),
+        actions: [
+          TextButton(
+            onPressed: () => Navigator.pop(context),
+            child: const Text('取消'),
+          ),
+          TextButton(
+            onPressed: () {
+              LearningStats().clear();
+              Navigator.pop(context);
+              ScaffoldMessenger.of(context).showSnackBar(
+                const SnackBar(content: Text('✅ 数据已清除')),
+              );
+              // 返回上一页刷新
+              Navigator.pop(context);
+            },
+            style: TextButton.styleFrom(foregroundColor: Colors.red),
+            child: const Text('确定清除'),
+          ),
+        ],
       ),
     );
   }
@@ -1428,6 +2173,7 @@ class _FillInBlankPageState extends State<FillInBlankPage>
   String _currentMeaning = '';
   List<int> _blankIndices = []; // 空格的位置索引
   List<String?> _userAnswers = []; // 用户填入的答案
+  List<int?> _usedButtonIndices = []; // 每个空格对应使用的字母按钮索引
   List<String> _letterOptions = []; // 可选字母
   Set<int> _usedLetterIndices = {}; // 已使用的字母按钮索引
   int _currentBlankIndex = 0; // 当前要填的是第几个空格
@@ -1570,6 +2316,7 @@ class _FillInBlankPageState extends State<FillInBlankPage>
 
     // 初始化用户答案
     _userAnswers = List.filled(blankCount, null);
+    _usedButtonIndices = List.filled(blankCount, null);
     _currentBlankIndex = 0;
 
     // 生成可选字母（正确字母 + 干扰字母）
@@ -1610,20 +2357,36 @@ class _FillInBlankPageState extends State<FillInBlankPage>
   // 用户点击字母
   void _onLetterSelected(int index) {
     if (_showResult) return;
-    if (_allFilled) return;
     if (_currentBlankIndex >= _blankIndices.length) return;
     if (_usedLetterIndices.contains(index)) return;
 
     final letter = _letterOptions[index];
     setState(() {
       _userAnswers[_currentBlankIndex] = letter;
+      _usedButtonIndices[_currentBlankIndex] = index;
       _usedLetterIndices.add(index);
       _currentBlankIndex++;
 
       // 如果填完了所有空格，显示确定按钮
-      if (_currentBlankIndex >= _blankIndices.length) {
-        _allFilled = true;
-      }
+      _allFilled = _userAnswers.every((a) => a != null);
+    });
+  }
+
+  // 点击已填写的空格，修改已填的字母
+  void _onBlankTapped(int blankIndex) {
+    if (_showResult) return;
+    if (_userAnswers[blankIndex] == null) return;
+
+    final usedBtnIndex = _usedButtonIndices[blankIndex];
+    if (usedBtnIndex != null) {
+      _usedLetterIndices.remove(usedBtnIndex);
+    }
+
+    setState(() {
+      _userAnswers[blankIndex] = null;
+      _usedButtonIndices[blankIndex] = null;
+      _currentBlankIndex = blankIndex; // 光标回到这个空格
+      _allFilled = _userAnswers.every((a) => a != null);
     });
   }
 
@@ -1682,13 +2445,21 @@ class _FillInBlankPageState extends State<FillInBlankPage>
                   Random().nextInt(_surrenderLines.length)];
               _shakeController.forward();
               _explosionController.forward();
-              SystemSound.play(SystemSoundType.click);
-              HapticFeedback.mediumImpact();
+              if (LearningStats().soundEnabled) {
+                SystemSound.play(SystemSoundType.click);
+              }
+              if (LearningStats().vibrationEnabled) {
+                HapticFeedback.mediumImpact();
+              }
             } else {
               _currentTaunt =
                   _moreTaunts[Random().nextInt(_moreTaunts.length)];
-              SystemSound.play(SystemSoundType.alert);
-              HapticFeedback.heavyImpact();
+              if (LearningStats().soundEnabled) {
+                SystemSound.play(SystemSoundType.alert);
+              }
+              if (LearningStats().vibrationEnabled) {
+                HapticFeedback.heavyImpact();
+              }
             }
           });
         });
@@ -2291,10 +3062,16 @@ class _FillInBlankPageState extends State<FillInBlankPage>
                   child: Stack(
                     alignment: Alignment.bottomCenter,
                     children: [
-                      // 字母/空格
+                      // 字母/空格 - 点击已填的格子可以修改
                       Positioned(
                         top: 0,
-                        child: Container(
+                        child: GestureDetector(
+                          onTap: () {
+                            if (isBlank && !_showResult && _userAnswers[blankIndex] != null) {
+                              _onBlankTap(blankIndex);
+                            }
+                          },
+                          child: Container(
                           width: 40,
                           height: 50,
                           decoration: BoxDecoration(
@@ -2615,14 +3392,22 @@ class _GamePageState extends State<GamePage> with TickerProviderStateMixin {
       if (isCorrect) {
         _score += 10 + (_streak * 5); // 基础分+连击加成
         _streak++;
-        SystemSound.play(SystemSoundType.click);
-        HapticFeedback.lightImpact();
+        if (LearningStats().soundEnabled) {
+          SystemSound.play(SystemSoundType.click);
+        }
+        if (LearningStats().vibrationEnabled) {
+          HapticFeedback.lightImpact();
+        }
         // 更新学习统计
         LearningStats().addCorrect(10 + ((_streak - 1) * 5), _streak);
       } else {
         _streak = 0;
-        SystemSound.play(SystemSoundType.alert);
-        HapticFeedback.heavyImpact();
+        if (LearningStats().soundEnabled) {
+          SystemSound.play(SystemSoundType.alert);
+        }
+        if (LearningStats().vibrationEnabled) {
+          HapticFeedback.heavyImpact();
+        }
         // 更新学习统计
         LearningStats().addWrong(currentWord);
       }

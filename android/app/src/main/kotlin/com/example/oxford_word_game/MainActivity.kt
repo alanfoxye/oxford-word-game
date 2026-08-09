@@ -24,7 +24,9 @@ class MainActivity: FlutterActivity() {
         MethodChannel(flutterEngine.dartExecutor.binaryMessenger, CHANNEL).setMethodCallHandler { call, result ->
             if (call.method == "speak") {
                 val text = call.argument<String>("text")
+                val rate = call.argument<Double>("rate") ?: 0.5f
                 if (text != null) {
+                    tts.setSpeechRate(rate.toFloat())
                     tts.speak(text, TextToSpeech.QUEUE_FLUSH, null, null)
                     result.success(true)
                 } else {
