@@ -149,7 +149,7 @@ class _SplashScreenState extends State<SplashScreen>
                     const SizedBox(height: 40),
                     // 文字
                     const Text(
-                      '这是大双小双的',
+                      '这是大家的',
                       style: TextStyle(
                         fontSize: 26,
                         color: Colors.white70,
