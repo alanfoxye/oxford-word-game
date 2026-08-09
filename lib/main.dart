@@ -3068,39 +3068,40 @@ class _FillInBlankPageState extends State<FillInBlankPage>
                         child: GestureDetector(
                           onTap: () {
                             if (isBlank && !_showResult && _userAnswers[blankIndex] != null) {
-                              _onBlankTap(blankIndex);
+                              _onBlankTapped(blankIndex);
                             }
                           },
                           child: Container(
-                          width: 40,
-                          height: 50,
-                          decoration: BoxDecoration(
-                            color: isBlank
-                                ? (userAnswer != null
-                                    ? (_showResult
-                                        ? (_isCorrect ? Colors.green[100] : Colors.red[100])
-                                        : Colors.white)
-                                    : Colors.white.withOpacity(0.3))
-                                : Colors.white,
-                            borderRadius: BorderRadius.circular(8),
-                            border: Border.all(
-                              color: isCurrentBlank ? Colors.yellow : Colors.white.withOpacity(0.5),
-                              width: isCurrentBlank ? 3 : 2,
+                            width: 40,
+                            height: 50,
+                            decoration: BoxDecoration(
+                              color: isBlank
+                                  ? (userAnswer != null
+                                      ? (_showResult
+                                          ? (_isCorrect ? Colors.green[100] : Colors.red[100])
+                                          : Colors.white)
+                                      : Colors.white.withOpacity(0.3))
+                                  : Colors.white,
+                              borderRadius: BorderRadius.circular(8),
+                              border: Border.all(
+                                color: isCurrentBlank ? Colors.yellow : Colors.white.withOpacity(0.5),
+                                width: isCurrentBlank ? 3 : 2,
+                              ),
                             ),
-                          ),
-                          child: Center(
-                            child: Text(
-                              isBlank ? (userAnswer ?? '') : _currentWord[index],
-                              style: TextStyle(
-                                fontSize: 28,
-                                fontWeight: FontWeight.bold,
-                                color: isBlank
-                                    ? (userAnswer != null
-                                        ? (_showResult
-                                            ? (_isCorrect ? Colors.green : Colors.red)
-                                            : Colors.deepPurple)
-                                        : Colors.transparent)
-                                    : Colors.deepPurple[900],
+                            child: Center(
+                              child: Text(
+                                isBlank ? (userAnswer ?? '') : _currentWord[index],
+                                style: TextStyle(
+                                  fontSize: 28,
+                                  fontWeight: FontWeight.bold,
+                                  color: isBlank
+                                      ? (userAnswer != null
+                                          ? (_showResult
+                                              ? (_isCorrect ? Colors.green : Colors.red)
+                                              : Colors.deepPurple)
+                                          : Colors.transparent)
+                                      : Colors.deepPurple[900],
+                                ),
                               ),
                             ),
                           ),
