@@ -8,6 +8,7 @@ import 'package:shared_preferences/shared_preferences.dart';
 import 'package:http/http.dart' as http;
 import 'package:path_provider/path_provider.dart';
 import 'package:open_filex/open_filex.dart';
+import 'package:image_picker/image_picker.dart';
 
 // 主入口
 void main() async {
@@ -274,6 +275,7 @@ class LearningStats {
   int correctCount = 0;     // 正确数
   int maxStreak = 0;        // 最高连击
   List<Word> wrongWords = []; // 错题本（去重）
+  String avatarPath = '';   // 头像本地路径
 
   // 初始化，从本地加载数据
   Future<void> init() async {
@@ -291,7 +293,17 @@ class LearningStats {
       wrongWords = list.map((item) => Word.fromJson(item as Map<String, dynamic>)).toList();
     }
 
+    // 加载头像路径
+    avatarPath = _prefs!.getString('avatarPath') ?? '';
+
     _initialized = true;
+  }
+
+  // 保存头像路径
+  Future<void> saveAvatar(String path) async {
+    if (_prefs == null) return;
+    avatarPath = path;
+    await _prefs!.setString('avatarPath', path);
   }
 
   // 保存到本地
@@ -343,6 +355,51 @@ class LearningStats {
     return '${(accuracy * 100).toStringAsFixed(0)}%';
   }
 
+  // 获取等级信息
+  Map<String, dynamic> getLevelInfo() {
+    if (totalScore < 5000) {
+      return {
+        'name': '青铜',
+        'icon': '🥉',
+        'color': const Color(0xFFCD7F32),
+        'next': 5000,
+        'progress': totalScore / 5000,
+      };
+    } else if (totalScore < 20000) {
+      return {
+        'name': '白银',
+        'icon': '🥈',
+        'color': const Color(0xFFC0C0C0),
+        'next': 20000,
+        'progress': (totalScore - 5000) / 15000,
+      };
+    } else if (totalScore < 50000) {
+      return {
+        'name': '黄金',
+        'icon': '🥇',
+        'color': const Color(0xFFFFD700),
+        'next': 50000,
+        'progress': (totalScore - 20000) / 30000,
+      };
+    } else if (totalScore < 100000) {
+      return {
+        'name': '钻石',
+        'icon': '💎',
+        'color': const Color(0xFFB9F2FF),
+        'next': 100000,
+        'progress': (totalScore - 50000) / 50000,
+      };
+    } else {
+      return {
+        'name': '王者',
+        'icon': '👑',
+        'color': const Color(0xFFFF4500),
+        'next': -1,
+        'progress': 1.0,
+      };
+    }
+  }
+
   // 清空统计
   void clear() {
     totalScore = 0;
@@ -354,12 +411,84 @@ class LearningStats {
   }
 }
 
-// 我的页面
-class ProfilePage extends StatelessWidget {
+// 我的页面（StatefulWidget - 支持动态加载头像）
+class ProfilePage extends StatefulWidget {
   const ProfilePage({super.key});
 
   @override
+  State<ProfilePage> createState() => _ProfilePageState();
+}
+
+class _ProfilePageState extends State<ProfilePage> {
+  String? _avatarPath;
+  final ImagePicker _picker = ImagePicker();
+
+  @override
+  void initState() {
+    super.initState();
+    _loadAvatar();
+  }
+
+  // 加载头像
+  Future<void> _loadAvatar() async {
+    final stats = LearningStats();
+    if (stats.avatarPath.isNotEmpty) {
+      setState(() {
+        _avatarPath = stats.avatarPath;
+      });
+    }
+  }
+
+  // 选择头像
+  Future<void> _pickAvatar() async {
+    try {
+      final XFile? picked = await _picker.pickImage(
+        source: ImageSource.gallery,
+        maxWidth: 256,
+        maxHeight: 256,
+        imageQuality: 80,
+      );
+      if (picked != null) {
+        // Web端直接用XFile路径，移动端保存到应用目录
+        String savedPath;
+        if (Platform.isAndroid || Platform.isIOS) {
+          final docDir = await getApplicationDocumentsDirectory();
+          final fileName = 'avatar_${DateTime.now().millisecondsSinceEpoch}.jpg';
+          final savedFile = await File(picked.path).copy('${docDir.path}/$fileName');
+          savedPath = savedFile.path;
+        } else {
+          // Web端直接保存原始路径
+          savedPath = picked.path;
+        }
+
+        setState(() {
+          _avatarPath = savedPath;
+        });
+        await LearningStats().saveAvatar(savedPath);
+
+        if (mounted) {
+          ScaffoldMessenger.of(context).showSnackBar(
+            const SnackBar(content: Text('✅ 头像已更新！')),
+          );
+        }
+      }
+    } catch (e) {
+      if (mounted) {
+        ScaffoldMessenger.of(context).showSnackBar(
+          SnackBar(content: Text('选择图片失败：$e')),
+        );
+      }
+    }
+  }
+
+  // 获取等级信息
+  Map<String, dynamic> get _levelInfo => LearningStats().getLevelInfo();
+
+  @override
   Widget build(BuildContext context) {
+    final levelInfo = _levelInfo;
+    final score = LearningStats().totalScore;
+
     return Scaffold(
       appBar: AppBar(
         title: const Text('我的'),
@@ -382,22 +511,72 @@ class ProfilePage extends StatelessWidget {
               padding: const EdgeInsets.all(24),
               child: Column(
                 children: [
-                  // 头像
-                  Container(
-                    width: 100,
-                    height: 100,
-                    decoration: BoxDecoration(
-                      shape: BoxShape.circle,
-                      color: Colors.white.withOpacity(0.2),
-                      border: Border.all(color: Colors.white, width: 3),
-                    ),
-                    child: const Icon(
-                      Icons.child_care_rounded,
-                      size: 60,
-                      color: Colors.white,
+                  // 头像 - 可点击修改
+                  GestureDetector(
+                    onTap: _pickAvatar,
+                    child: Stack(
+                      children: [
+                        Container(
+                          width: 100,
+                          height: 100,
+                          decoration: BoxDecoration(
+                            shape: BoxShape.circle,
+                            border: Border.all(color: Colors.white, width: 3),
+                          ),
+                          child: ClipOval(
+                            child: _avatarPath != null && _avatarPath!.isNotEmpty
+                                ? Image.file(
+                                    File(_avatarPath!),
+                                    width: 94,
+                                    height: 94,
+                                    fit: BoxFit.cover,
+                                    errorBuilder: (context, error, stackTrace) {
+                                      // 如果图片加载失败，显示段位标志
+                                      return Container(
+                                        color: Colors.white.withOpacity(0.2),
+                                        child: Center(
+                                          child: Text(
+                                            levelInfo['icon'] as String,
+                                            style: const TextStyle(fontSize: 48),
+                                          ),
+                                        ),
+                                      );
+                                    },
+                                  )
+                                : Container(
+                                    color: Colors.white.withOpacity(0.2),
+                                    child: Center(
+                                      child: Text(
+                                        levelInfo['icon'] as String,
+                                        style: const TextStyle(fontSize: 48),
+                                      ),
+                                    ),
+                                  ),
+                          ),
+                        ),
+                        // 右下角编辑图标
+                        Positioned(
+                          right: 0,
+                          bottom: 0,
+                          child: Container(
+                            width: 28,
+                            height: 28,
+                            decoration: BoxDecoration(
+                              color: Colors.white,
+                              shape: BoxShape.circle,
+                              border: Border.all(color: const Color(0xFF6C63FF), width: 2),
+                            ),
+                            child: const Icon(
+                              Icons.edit_rounded,
+                              size: 16,
+                              color: Color(0xFF6C63FF),
+                            ),
+                          ),
+                        ),
+                      ],
                     ),
                   ),
-                  const SizedBox(height: 16),
+                  const SizedBox(height: 12),
                   // 昵称
                   const Text(
                     '小小学霸',
@@ -408,21 +587,58 @@ class ProfilePage extends StatelessWidget {
                     ),
                   ),
                   const SizedBox(height: 8),
-                  // 等级
+                  // 等级标志
                   Container(
                     padding: const EdgeInsets.symmetric(horizontal: 16, vertical: 6),
                     decoration: BoxDecoration(
-                      color: Colors.white.withOpacity(0.2),
+                      color: (levelInfo['color'] as Color).withOpacity(0.3),
                       borderRadius: BorderRadius.circular(20),
+                      border: Border.all(color: (levelInfo['color'] as Color).withOpacity(0.5), width: 1),
                     ),
-                    child: const Text(
-                      '⭐ 词汇新星 Lv.1',
-                      style: TextStyle(
-                        fontSize: 14,
-                        color: Colors.white,
-                      ),
+                    child: Row(
+                      mainAxisSize: MainAxisSize.min,
+                      children: [
+                        Text(levelInfo['icon'] as String, style: const TextStyle(fontSize: 16)),
+                        const SizedBox(width: 4),
+                        Text(
+                          '${levelInfo['name']} ${score > 0 ? 'Lv.${(score / 5000).floor() + 1}' : 'Lv.1'}',
+                          style: const TextStyle(
+                            fontSize: 14,
+                            color: Colors.white,
+                            fontWeight: FontWeight.w600,
+                          ),
+                        ),
+                      ],
                     ),
                   ),
+                  // 升级进度条
+                  if (levelInfo['next'] != -1) ...[
+                    const SizedBox(height: 12),
+                    SizedBox(
+                      width: 200,
+                      child: Column(
+                        children: [
+                          LinearProgressIndicator(
+                            value: (levelInfo['progress'] as double).clamp(0.0, 1.0),
+                            backgroundColor: Colors.white.withOpacity(0.2),
+                            valueColor: AlwaysStoppedAnimation<Color>(Colors.white),
+                            minHeight: 6,
+                            borderRadius: BorderRadius.circular(3),
+                          ),
+                          const SizedBox(height: 4),
+                          Text(
+                            levelInfo['next'] == -1
+                                ? '已达最高等级！👑'
+                                : '距下一级还需 ${levelInfo['next'] - score} 积分',
+                            style: TextStyle(
+                              fontSize: 11,
+                              color: Colors.white70,
+                            ),
+                          ),
+                        ],
+                      ),
+                    ),
+                  ],
                 ],
               ),
             ),
