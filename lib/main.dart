@@ -4,6 +4,7 @@ import 'dart:io';
 import 'dart:math';
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
+import 'package:flutter/services.dart';
 import 'package:shared_preferences/shared_preferences.dart';
 import 'package:http/http.dart' as http;
 import 'package:path_provider/path_provider.dart';
@@ -676,7 +677,7 @@ class ProfilePage extends StatelessWidget {
 
   // 检查更新
   void _checkUpdate(BuildContext context) async {
-    const String currentVersion = '1.2.1';
+    const String currentVersion = '1.3.0';
     const String versionUrl = 'https://gitee.com/alanfoxe/oxford-word-game/raw/master/version.json';
 
     // 显示加载对话框
@@ -814,8 +815,23 @@ class ProfilePage extends StatelessWidget {
 }
 
 // 错词本页面
-class WrongWordsPage extends StatelessWidget {
+class WrongWordsPage extends StatefulWidget {
   const WrongWordsPage({super.key});
+
+  @override
+  State<WrongWordsPage> createState() => _WrongWordsPageState();
+}
+
+class _WrongWordsPageState extends State<WrongWordsPage> {
+  static const platform = MethodChannel('com.example.oxford_word_game/tts');
+
+  Future<void> _speakWord(String word) async {
+    try {
+      await platform.invokeMethod('speak', {'text': word});
+    } catch (e) {
+      // 忽略 TTS 错误
+    }
+  }
 
   @override
   Widget build(BuildContext context) {
@@ -893,10 +909,13 @@ class WrongWordsPage extends StatelessWidget {
                             ],
                           ),
                         ),
-                        const Icon(
-                          Icons.volume_up_rounded,
-                          color: Colors.grey,
-                          size: 28,
+                        IconButton(
+                          icon: const Icon(
+                            Icons.volume_up_rounded,
+                            color: Color(0xFF6C63FF),
+                            size: 28,
+                          ),
+                          onPressed: () => _speakWord(word.word),
                         ),
                       ],
                     ),
