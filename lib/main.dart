@@ -139,10 +139,11 @@ class _SplashScreenState extends State<SplashScreen>
                         color: Colors.white.withOpacity(0.2),
                         shape: BoxShape.circle,
                       ),
-                      child: const Icon(
-                        Icons.school_rounded,
-                        size: 64,
-                        color: Colors.white,
+                      child: ClipOval(
+                        child: Image.asset(
+                          'assets/app_icon.png',
+                          fit: BoxFit.cover,
+                        ),
                       ),
                     ),
                     const SizedBox(height: 40),
@@ -892,7 +893,7 @@ class _ProfilePageState extends State<ProfilePage> {
 
   // 检查更新
   void _checkUpdate(BuildContext context) async {
-    const String currentVersion = '1.3.0';
+    const String currentVersion = '1.3.1';
     const String versionUrl = 'https://gitee.com/alanfoxe/oxford-word-game/raw/master/version.json';
 
     // 显示加载对话框

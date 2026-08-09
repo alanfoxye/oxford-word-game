@@ -1,0 +1,2459 @@
+[
+  {
+    "word": "meet",
+    "meaning": "v. 相识；结识",
+    "grade": "4A",
+    "unit": "Unit1",
+    "emoji": "🤝"
+  },
+  {
+    "word": "morning",
+    "meaning": "n. 早晨；上午",
+    "grade": "4A",
+    "unit": "Unit1",
+    "emoji": "🌅"
+  },
+  {
+    "word": "classmate",
+    "meaning": "n. 同班同学",
+    "grade": "4A",
+    "unit": "Unit1",
+    "emoji": "👨‍🎓"
+  },
+  {
+    "word": "name",
+    "meaning": "n. 名字",
+    "grade": "4A",
+    "unit": "Unit1",
+    "emoji": "📛"
+  },
+  {
+    "word": "afternoon",
+    "meaning": "n. 下午",
+    "grade": "4A",
+    "unit": "Unit1",
+    "emoji": "☀️"
+  },
+  {
+    "word": "run",
+    "meaning": "v. 跑",
+    "grade": "4A",
+    "unit": "Unit2",
+    "emoji": "🏃"
+  },
+  {
+    "word": "fast",
+    "meaning": "adv. 快地 adj. 快的",
+    "grade": "4A",
+    "unit": "Unit2",
+    "emoji": "⚡"
+  },
+  {
+    "word": "fly",
+    "meaning": "v. 飞；放飞",
+    "grade": "4A",
+    "unit": "Unit2",
+    "emoji": "🦋"
+  },
+  {
+    "word": "draw",
+    "meaning": "v. 画画",
+    "grade": "4A",
+    "unit": "Unit2",
+    "emoji": "✏️"
+  },
+  {
+    "word": "write",
+    "meaning": "v. 写字；书写",
+    "grade": "4A",
+    "unit": "Unit2",
+    "emoji": "✍️"
+  },
+  {
+    "word": "jump",
+    "meaning": "v. 跳",
+    "grade": "4A",
+    "unit": "Unit2",
+    "emoji": "🦘"
+  },
+  {
+    "word": "welcome",
+    "meaning": "v. 欢迎",
+    "grade": "4A",
+    "unit": "Unit2",
+    "emoji": "👋"
+  },
+  {
+    "word": "happy",
+    "meaning": "adj. 开心的",
+    "grade": "4A",
+    "unit": "Unit3",
+    "emoji": "😊"
+  },
+  {
+    "word": "sad",
+    "meaning": "adj. 难过的；悲哀的",
+    "grade": "4A",
+    "unit": "Unit3",
+    "emoji": "😢"
+  },
+  {
+    "word": "tired",
+    "meaning": "adj. 累的；疲惫的",
+    "grade": "4A",
+    "unit": "Unit3",
+    "emoji": "😴"
+  },
+  {
+    "word": "hungry",
+    "meaning": "adj. 饥饿的",
+    "grade": "4A",
+    "unit": "Unit3",
+    "emoji": "🍽️"
+  },
+  {
+    "word": "full",
+    "meaning": "adj. 饱的",
+    "grade": "4A",
+    "unit": "Unit3",
+    "emoji": "🤰"
+  },
+  {
+    "word": "thirsty",
+    "meaning": "adj. 口渴的",
+    "grade": "4A",
+    "unit": "Unit3",
+    "emoji": "🥤"
+  },
+  {
+    "word": "bottle",
+    "meaning": "n. 瓶子",
+    "grade": "4A",
+    "unit": "Unit3",
+    "emoji": "🍶"
+  },
+  {
+    "word": "drink",
+    "meaning": "v. 喝",
+    "grade": "4A",
+    "unit": "Unit3",
+    "emoji": "🥛"
+  },
+  {
+    "word": "cousin",
+    "meaning": "n. 表兄弟；表姐妹",
+    "grade": "4A",
+    "unit": "Unit4",
+    "emoji": "👨‍👩‍👧"
+  },
+  {
+    "word": "family",
+    "meaning": "n. 家庭",
+    "grade": "4A",
+    "unit": "Unit4",
+    "emoji": "👨‍👩‍👧‍👦"
+  },
+  {
+    "word": "parent",
+    "meaning": "n. 父亲；母亲",
+    "grade": "4A",
+    "unit": "Unit4",
+    "emoji": "👨‍👩"
+  },
+  {
+    "word": "grandparent",
+    "meaning": "n.（外）祖父；（外）祖母",
+    "grade": "4A",
+    "unit": "Unit4",
+    "emoji": "👴👵"
+  },
+  {
+    "word": "son",
+    "meaning": "n. 儿子",
+    "grade": "4A",
+    "unit": "Unit4",
+    "emoji": "👦"
+  },
+  {
+    "word": "uncle",
+    "meaning": "n. 叔叔；伯伯；舅舅",
+    "grade": "4A",
+    "unit": "Unit4",
+    "emoji": "👨"
+  },
+  {
+    "word": "aunt",
+    "meaning": "n. 姑妈；姨妈；伯母",
+    "grade": "4A",
+    "unit": "Unit4",
+    "emoji": "👩"
+  },
+  {
+    "word": "shirt",
+    "meaning": "n.（男式）衬衫",
+    "grade": "4A",
+    "unit": "Unit5",
+    "emoji": "👔"
+  },
+  {
+    "word": "skirt",
+    "meaning": "n. 短裙",
+    "grade": "4A",
+    "unit": "Unit5",
+    "emoji": "👗"
+  },
+  {
+    "word": "dress",
+    "meaning": "n. 连衣裙",
+    "grade": "4A",
+    "unit": "Unit5",
+    "emoji": "👗"
+  },
+  {
+    "word": "shorts",
+    "meaning": "n. 短裤",
+    "grade": "4A",
+    "unit": "Unit5",
+    "emoji": "🩳"
+  },
+  {
+    "word": "brown",
+    "meaning": "adj. 棕色的 n. 棕色",
+    "grade": "4A",
+    "unit": "Unit5",
+    "emoji": "🟤"
+  },
+  {
+    "word": "ride",
+    "meaning": "v. 骑（马；自行车）",
+    "grade": "4A",
+    "unit": "Unit5",
+    "emoji": "🚴"
+  },
+  {
+    "word": "tooth",
+    "meaning": "n. 牙齿",
+    "grade": "4A",
+    "unit": "Unit5",
+    "emoji": "🦷"
+  },
+  {
+    "word": "sharp",
+    "meaning": "adj. 锋利的；尖的",
+    "grade": "4A",
+    "unit": "Unit5",
+    "emoji": "🔪"
+  },
+  {
+    "word": "nurse",
+    "meaning": "n. 护士",
+    "grade": "4A",
+    "unit": "Unit6",
+    "emoji": "👩‍⚕️"
+  },
+  {
+    "word": "fireman",
+    "meaning": "n. 消防员",
+    "grade": "4A",
+    "unit": "Unit6",
+    "emoji": "👨‍🚒"
+  },
+  {
+    "word": "teacher",
+    "meaning": "n. 老师",
+    "grade": "4A",
+    "unit": "Unit6",
+    "emoji": "👩‍🏫"
+  },
+  {
+    "word": "doctor",
+    "meaning": "n. 医生",
+    "grade": "4A",
+    "unit": "Unit6",
+    "emoji": "👨‍⚕️"
+  },
+  {
+    "word": "driver",
+    "meaning": "n. 司机",
+    "grade": "4A",
+    "unit": "Unit6",
+    "emoji": "🚗"
+  },
+  {
+    "word": "job",
+    "meaning": "n. 工作；职业",
+    "grade": "4A",
+    "unit": "Unit6",
+    "emoji": "💼"
+  },
+  {
+    "word": "people",
+    "meaning": "n. 人；人们",
+    "grade": "4A",
+    "unit": "Unit6",
+    "emoji": "👥"
+  },
+  {
+    "word": "school",
+    "meaning": "n. 学校",
+    "grade": "4A",
+    "unit": "Unit7",
+    "emoji": "🏫"
+  },
+  {
+    "word": "office",
+    "meaning": "n. 办公室",
+    "grade": "4A",
+    "unit": "Unit7",
+    "emoji": "🏢"
+  },
+  {
+    "word": "computer",
+    "meaning": "n. 计算机；电脑",
+    "grade": "4A",
+    "unit": "Unit7",
+    "emoji": "💻"
+  },
+  {
+    "word": "library",
+    "meaning": "n. 图书馆",
+    "grade": "4A",
+    "unit": "Unit7",
+    "emoji": "📚"
+  },
+  {
+    "word": "playground",
+    "meaning": "n. 操场",
+    "grade": "4A",
+    "unit": "Unit7",
+    "emoji": "🏃‍♂️"
+  },
+  {
+    "word": "classroom",
+    "meaning": "n. 教室",
+    "grade": "4A",
+    "unit": "Unit7",
+    "emoji": "🚪"
+  },
+  {
+    "word": "toilet",
+    "meaning": "n. 厕所",
+    "grade": "4A",
+    "unit": "Unit7",
+    "emoji": "🚻"
+  },
+  {
+    "word": "forest",
+    "meaning": "n. 森林",
+    "grade": "4A",
+    "unit": "Unit7",
+    "emoji": "🌲"
+  },
+  {
+    "word": "pupil",
+    "meaning": "n. 小学生",
+    "grade": "4A",
+    "unit": "Unit7",
+    "emoji": "🧒"
+  },
+  {
+    "word": "climb",
+    "meaning": "v. 爬；攀登",
+    "grade": "4A",
+    "unit": "Unit7",
+    "emoji": "🧗"
+  },
+  {
+    "word": "store",
+    "meaning": "n. 商店",
+    "grade": "4A",
+    "unit": "Unit8",
+    "emoji": "🏪"
+  },
+  {
+    "word": "tomato",
+    "meaning": "n. 番茄；西红柿",
+    "grade": "4A",
+    "unit": "Unit8",
+    "emoji": "🍅"
+  },
+  {
+    "word": "soup",
+    "meaning": "n. 汤",
+    "grade": "4A",
+    "unit": "Unit8",
+    "emoji": "🍲"
+  },
+  {
+    "word": "potato",
+    "meaning": "n. 土豆",
+    "grade": "4A",
+    "unit": "Unit8",
+    "emoji": "🥔"
+  },
+  {
+    "word": "carrot",
+    "meaning": "n. 胡萝卜",
+    "grade": "4A",
+    "unit": "Unit8",
+    "emoji": "🥕"
+  },
+  {
+    "word": "fish",
+    "meaning": "n. 鱼；鱼肉",
+    "grade": "4A",
+    "unit": "Unit8",
+    "emoji": "🐟"
+  },
+  {
+    "word": "meat",
+    "meaning": "n. 肉",
+    "grade": "4A",
+    "unit": "Unit8",
+    "emoji": "🥩"
+  },
+  {
+    "word": "rice",
+    "meaning": "n. 大米；米饭",
+    "grade": "4A",
+    "unit": "Unit8",
+    "emoji": "🍚"
+  },
+  {
+    "word": "glasses",
+    "meaning": "n. 眼镜",
+    "grade": "4A",
+    "unit": "Unit8",
+    "emoji": "👓"
+  },
+  {
+    "word": "magic",
+    "meaning": "adj. 神奇的；有魔力的",
+    "grade": "4A",
+    "unit": "Unit8",
+    "emoji": "✨"
+  },
+  {
+    "word": "need",
+    "meaning": "v. 需要",
+    "grade": "4A",
+    "unit": "Unit9",
+    "emoji": "❗"
+  },
+  {
+    "word": "where",
+    "meaning": "adv. 哪里",
+    "grade": "4A",
+    "unit": "Unit9",
+    "emoji": "❓"
+  },
+  {
+    "word": "box",
+    "meaning": "n. 盒子；箱子",
+    "grade": "4A",
+    "unit": "Unit9",
+    "emoji": "📦"
+  },
+  {
+    "word": "give",
+    "meaning": "v. 给",
+    "grade": "4A",
+    "unit": "Unit9",
+    "emoji": "🎁"
+  },
+  {
+    "word": "plate",
+    "meaning": "n. 盘子；碟子",
+    "grade": "4A",
+    "unit": "Unit9",
+    "emoji": "🍽️"
+  },
+  {
+    "word": "table",
+    "meaning": "n. 桌子",
+    "grade": "4A",
+    "unit": "Unit9",
+    "emoji": "🪑"
+  },
+  {
+    "word": "lunch",
+    "meaning": "n. 午餐",
+    "grade": "4A",
+    "unit": "Unit9",
+    "emoji": "🥪"
+  },
+  {
+    "word": "under",
+    "meaning": "prep. 在……下面",
+    "grade": "4A",
+    "unit": "Unit9",
+    "emoji": "⬇️"
+  },
+  {
+    "word": "beside",
+    "meaning": "prep. 在……旁边",
+    "grade": "4A",
+    "unit": "Unit9",
+    "emoji": "➡️"
+  },
+  {
+    "word": "kitchen",
+    "meaning": "n. 厨房",
+    "grade": "4A",
+    "unit": "Unit9",
+    "emoji": "🍳"
+  },
+  {
+    "word": "angry",
+    "meaning": "adj. 生气的",
+    "grade": "4A",
+    "unit": "Unit9",
+    "emoji": "😠"
+  },
+  {
+    "word": "around",
+    "meaning": "prep. 在……周围；到处",
+    "grade": "4A",
+    "unit": "Unit10",
+    "emoji": "🔄"
+  },
+  {
+    "word": "home",
+    "meaning": "n. 家",
+    "grade": "4A",
+    "unit": "Unit10",
+    "emoji": "🏠"
+  },
+  {
+    "word": "street",
+    "meaning": "n. 街道",
+    "grade": "4A",
+    "unit": "Unit10",
+    "emoji": "🛣️"
+  },
+  {
+    "word": "park",
+    "meaning": "n. 公园",
+    "grade": "4A",
+    "unit": "Unit10",
+    "emoji": "🌳"
+  },
+  {
+    "word": "near",
+    "meaning": "prep. 在……附近",
+    "grade": "4A",
+    "unit": "Unit10",
+    "emoji": "📍"
+  },
+  {
+    "word": "behind",
+    "meaning": "prep. 在……后面",
+    "grade": "4A",
+    "unit": "Unit10",
+    "emoji": "🔙"
+  },
+  {
+    "word": "supermarket",
+    "meaning": "n. 超市",
+    "grade": "4A",
+    "unit": "Unit10",
+    "emoji": "🛒"
+  },
+  {
+    "word": "restaurant",
+    "meaning": "n. 餐馆",
+    "grade": "4A",
+    "unit": "Unit10",
+    "emoji": "🍴"
+  },
+  {
+    "word": "live",
+    "meaning": "v. 住；居住",
+    "grade": "4A",
+    "unit": "Unit10",
+    "emoji": "🏡"
+  },
+  {
+    "word": "old",
+    "meaning": "adj. 古老的；旧的",
+    "grade": "4A",
+    "unit": "Unit10",
+    "emoji": "🏚️"
+  },
+  {
+    "word": "food",
+    "meaning": "n. 食物",
+    "grade": "4A",
+    "unit": "Unit10",
+    "emoji": "🍔"
+  },
+  {
+    "word": "shape",
+    "meaning": "n. 形状",
+    "grade": "4A",
+    "unit": "Unit11",
+    "emoji": "⭐"
+  },
+  {
+    "word": "picture",
+    "meaning": "n. 图画；照片",
+    "grade": "4A",
+    "unit": "Unit11",
+    "emoji": "🖼️"
+  },
+  {
+    "word": "square",
+    "meaning": "n. 正方形",
+    "grade": "4A",
+    "unit": "Unit11",
+    "emoji": "⬛"
+  },
+  {
+    "word": "circle",
+    "meaning": "n. 圆；圆形",
+    "grade": "4A",
+    "unit": "Unit11",
+    "emoji": "⭕"
+  },
+  {
+    "word": "star",
+    "meaning": "n. 五角星形；星星",
+    "grade": "4A",
+    "unit": "Unit11",
+    "emoji": "⭐"
+  },
+  {
+    "word": "rectangle",
+    "meaning": "n. 长方形",
+    "grade": "4A",
+    "unit": "Unit11",
+    "emoji": "▬"
+  },
+  {
+    "word": "triangle",
+    "meaning": "n. 三角形",
+    "grade": "4A",
+    "unit": "Unit11",
+    "emoji": "🔺"
+  },
+  {
+    "word": "today",
+    "meaning": "n. 今天",
+    "grade": "4A",
+    "unit": "Unit11",
+    "emoji": "📅"
+  },
+  {
+    "word": "weather",
+    "meaning": "n. 天气",
+    "grade": "4A",
+    "unit": "Unit12",
+    "emoji": "🌤️"
+  },
+  {
+    "word": "rainy",
+    "meaning": "adj. 多雨的",
+    "grade": "4A",
+    "unit": "Unit12",
+    "emoji": "🌧️"
+  },
+  {
+    "word": "cloudy",
+    "meaning": "adj. 多云的",
+    "grade": "4A",
+    "unit": "Unit12",
+    "emoji": "☁️"
+  },
+  {
+    "word": "windy",
+    "meaning": "adj. 风大的；多风的",
+    "grade": "4A",
+    "unit": "Unit12",
+    "emoji": "💨"
+  },
+  {
+    "word": "sunny",
+    "meaning": "adj. 阳光充足的",
+    "grade": "4A",
+    "unit": "Unit12",
+    "emoji": "☀️"
+  },
+  {
+    "word": "cloud",
+    "meaning": "n. 云",
+    "grade": "4A",
+    "unit": "Unit12",
+    "emoji": "☁️"
+  },
+  {
+    "word": "rain",
+    "meaning": "n. 雨 v. 下雨",
+    "grade": "4A",
+    "unit": "Unit12",
+    "emoji": "🌧️"
+  },
+  {
+    "word": "sun",
+    "meaning": "n. 太阳",
+    "grade": "4A",
+    "unit": "Unit12",
+    "emoji": "🌞"
+  },
+  {
+    "word": "wind",
+    "meaning": "n. 风",
+    "grade": "4A",
+    "unit": "Unit12",
+    "emoji": "🌬️"
+  },
+  {
+    "word": "touch",
+    "meaning": "v. 碰；触摸",
+    "grade": "4B",
+    "unit": "Unit1",
+    "emoji": "👆"
+  },
+  {
+    "word": "feel",
+    "meaning": "v. 摸起来；感到",
+    "grade": "4B",
+    "unit": "Unit1",
+    "emoji": "🤚"
+  },
+  {
+    "word": "soft",
+    "meaning": "adj. 柔软的",
+    "grade": "4B",
+    "unit": "Unit1",
+    "emoji": "🧸"
+  },
+  {
+    "word": "hard",
+    "meaning": "adj. 坚硬的",
+    "grade": "4B",
+    "unit": "Unit1",
+    "emoji": "🪨"
+  },
+  {
+    "word": "thick",
+    "meaning": "adj. 厚的；粗的",
+    "grade": "4B",
+    "unit": "Unit1",
+    "emoji": "📕"
+  },
+  {
+    "word": "thin",
+    "meaning": "adj. 薄的；细的",
+    "grade": "4B",
+    "unit": "Unit1",
+    "emoji": "📄"
+  },
+  {
+    "word": "blind",
+    "meaning": "adj. 瞎的；失明的",
+    "grade": "4B",
+    "unit": "Unit1",
+    "emoji": "👨‍🦯"
+  },
+  {
+    "word": "noise",
+    "meaning": "n. 响声；吵闹声",
+    "grade": "4B",
+    "unit": "Unit1",
+    "emoji": "🔊"
+  },
+  {
+    "word": "young",
+    "meaning": "adj. 年轻的",
+    "grade": "4B",
+    "unit": "Unit1",
+    "emoji": "👶"
+  },
+  {
+    "word": "smell",
+    "meaning": "v. 闻；嗅",
+    "grade": "4B",
+    "unit": "Unit2",
+    "emoji": "👃"
+  },
+  {
+    "word": "strawberry",
+    "meaning": "n. 草莓",
+    "grade": "4B",
+    "unit": "Unit2",
+    "emoji": "🍓"
+  },
+  {
+    "word": "watermelon",
+    "meaning": "n. 西瓜",
+    "grade": "4B",
+    "unit": "Unit2",
+    "emoji": "🍉"
+  },
+  {
+    "word": "grape",
+    "meaning": "n. 葡萄",
+    "grade": "4B",
+    "unit": "Unit2",
+    "emoji": "🍇"
+  },
+  {
+    "word": "fox",
+    "meaning": "n. 狐狸",
+    "grade": "4B",
+    "unit": "Unit2",
+    "emoji": "🦊"
+  },
+  {
+    "word": "round",
+    "meaning": "adj. 圆的",
+    "grade": "4B",
+    "unit": "Unit2",
+    "emoji": "🔵"
+  },
+  {
+    "word": "purple",
+    "meaning": "adj. 紫色的",
+    "grade": "4B",
+    "unit": "Unit2",
+    "emoji": "🟣"
+  },
+  {
+    "word": "wait",
+    "meaning": "v. 等待；等候",
+    "grade": "4B",
+    "unit": "Unit2",
+    "emoji": "⏳"
+  },
+  {
+    "word": "minute",
+    "meaning": "n. 一会儿；分钟",
+    "grade": "4B",
+    "unit": "Unit2",
+    "emoji": "⏱️"
+  },
+  {
+    "word": "those",
+    "meaning": "pron. 那些",
+    "grade": "4B",
+    "unit": "Unit2",
+    "emoji": "👆"
+  },
+  {
+    "word": "rise",
+    "meaning": "v. 升起",
+    "grade": "4B",
+    "unit": "Unit3",
+    "emoji": "🌅"
+  },
+  {
+    "word": "shadow",
+    "meaning": "n. 影子",
+    "grade": "4B",
+    "unit": "Unit3",
+    "emoji": "👤"
+  },
+  {
+    "word": "noon",
+    "meaning": "n. 中午",
+    "grade": "4B",
+    "unit": "Unit3",
+    "emoji": "🌞"
+  },
+  {
+    "word": "high",
+    "meaning": "adj. 高的",
+    "grade": "4B",
+    "unit": "Unit3",
+    "emoji": "⬆️"
+  },
+  {
+    "word": "sky",
+    "meaning": "n. 天空",
+    "grade": "4B",
+    "unit": "Unit3",
+    "emoji": "🌌"
+  },
+  {
+    "word": "evening",
+    "meaning": "n. 傍晚；晚上",
+    "grade": "4B",
+    "unit": "Unit3",
+    "emoji": "🌆"
+  },
+  {
+    "word": "again",
+    "meaning": "adv. 再；又",
+    "grade": "4B",
+    "unit": "Unit3",
+    "emoji": "🔁"
+  },
+  {
+    "word": "night",
+    "meaning": "n. 夜晚",
+    "grade": "4B",
+    "unit": "Unit3",
+    "emoji": "🌙"
+  },
+  {
+    "word": "moon",
+    "meaning": "n. 月亮",
+    "grade": "4B",
+    "unit": "Unit3",
+    "emoji": "🌕"
+  },
+  {
+    "word": "stop",
+    "meaning": "v. 停下",
+    "grade": "4B",
+    "unit": "Unit3",
+    "emoji": "🛑"
+  },
+  {
+    "word": "subject",
+    "meaning": "n. 学科；科目",
+    "grade": "4B",
+    "unit": "Unit4",
+    "emoji": "📚"
+  },
+  {
+    "word": "lesson",
+    "meaning": "n. 课",
+    "grade": "4B",
+    "unit": "Unit4",
+    "emoji": "📖"
+  },
+  {
+    "word": "Chinese",
+    "meaning": "n. 语文；中文",
+    "grade": "4B",
+    "unit": "Unit4",
+    "emoji": "🇨🇳"
+  },
+  {
+    "word": "Maths",
+    "meaning": "n. 数学",
+    "grade": "4B",
+    "unit": "Unit4",
+    "emoji": "🔢"
+  },
+  {
+    "word": "English",
+    "meaning": "n. 英语",
+    "grade": "4B",
+    "unit": "Unit4",
+    "emoji": "🇬🇧"
+  },
+  {
+    "word": "Science",
+    "meaning": "n. 科学",
+    "grade": "4B",
+    "unit": "Unit4",
+    "emoji": "🔬"
+  },
+  {
+    "word": "Music",
+    "meaning": "n. 音乐",
+    "grade": "4B",
+    "unit": "Unit4",
+    "emoji": "🎵"
+  },
+  {
+    "word": "Art",
+    "meaning": "n. 美术",
+    "grade": "4B",
+    "unit": "Unit4",
+    "emoji": "🎨"
+  },
+  {
+    "word": "timetable",
+    "meaning": "n. 课程表；时间表",
+    "grade": "4B",
+    "unit": "Unit4",
+    "emoji": "📋"
+  },
+  {
+    "word": "break",
+    "meaning": "n. 休息",
+    "grade": "4B",
+    "unit": "Unit4",
+    "emoji": "☕"
+  },
+  {
+    "word": "sport",
+    "meaning": "n. 体育运动",
+    "grade": "4B",
+    "unit": "Unit5",
+    "emoji": "⚽"
+  },
+  {
+    "word": "soccer",
+    "meaning": "n. 足球",
+    "grade": "4B",
+    "unit": "Unit5",
+    "emoji": "⚽"
+  },
+  {
+    "word": "club",
+    "meaning": "n. 俱乐部；兴趣小组",
+    "grade": "4B",
+    "unit": "Unit5",
+    "emoji": "🏛️"
+  },
+  {
+    "word": "join",
+    "meaning": "v. 参加；加入",
+    "grade": "4B",
+    "unit": "Unit5",
+    "emoji": "➕"
+  },
+  {
+    "word": "tell",
+    "meaning": "v. 告诉",
+    "grade": "4B",
+    "unit": "Unit5",
+    "emoji": "💬"
+  },
+  {
+    "word": "about",
+    "meaning": "prep. 关于",
+    "grade": "4B",
+    "unit": "Unit5",
+    "emoji": "📝"
+  },
+  {
+    "word": "basketball",
+    "meaning": "n. 篮球",
+    "grade": "4B",
+    "unit": "Unit5",
+    "emoji": "🏀"
+  },
+  {
+    "word": "volleyball",
+    "meaning": "n. 排球",
+    "grade": "4B",
+    "unit": "Unit5",
+    "emoji": "🏐"
+  },
+  {
+    "word": "wonderful",
+    "meaning": "adj. 使人愉悦的；绝妙的",
+    "grade": "4B",
+    "unit": "Unit6",
+    "emoji": "🌟"
+  },
+  {
+    "word": "violin",
+    "meaning": "n. 小提琴",
+    "grade": "4B",
+    "unit": "Unit6",
+    "emoji": "🎻"
+  },
+  {
+    "word": "guitar",
+    "meaning": "n. 吉他",
+    "grade": "4B",
+    "unit": "Unit6",
+    "emoji": "🎸"
+  },
+  {
+    "word": "whose",
+    "meaning": "pron. 谁的",
+    "grade": "4B",
+    "unit": "Unit6",
+    "emoji": "❓"
+  },
+  {
+    "word": "piano",
+    "meaning": "n. 钢琴",
+    "grade": "4B",
+    "unit": "Unit6",
+    "emoji": "🎹"
+  },
+  {
+    "word": "city",
+    "meaning": "n. 城市",
+    "grade": "4B",
+    "unit": "Unit6",
+    "emoji": "🏙️"
+  },
+  {
+    "word": "bag",
+    "meaning": "n. 袋子",
+    "grade": "4B",
+    "unit": "Unit6",
+    "emoji": "👜"
+  },
+  {
+    "word": "quarter",
+    "meaning": "n. 一刻钟",
+    "grade": "4B",
+    "unit": "Unit7",
+    "emoji": "🕐"
+  },
+  {
+    "word": "time",
+    "meaning": "n. 时间",
+    "grade": "4B",
+    "unit": "Unit7",
+    "emoji": "⏰"
+  },
+  {
+    "word": "half",
+    "meaning": "n. 半；一半",
+    "grade": "4B",
+    "unit": "Unit7",
+    "emoji": "🌗"
+  },
+  {
+    "word": "wash",
+    "meaning": "v. 洗",
+    "grade": "4B",
+    "unit": "Unit7",
+    "emoji": "🧼"
+  },
+  {
+    "word": "dinner",
+    "meaning": "n. 晚餐；正餐",
+    "grade": "4B",
+    "unit": "Unit7",
+    "emoji": "🍽️"
+  },
+  {
+    "word": "start",
+    "meaning": "v. 开始",
+    "grade": "4B",
+    "unit": "Unit7",
+    "emoji": "🚀"
+  },
+  {
+    "word": "catch",
+    "meaning": "v. 捉住",
+    "grade": "4B",
+    "unit": "Unit7",
+    "emoji": "🖐️"
+  },
+  {
+    "word": "week",
+    "meaning": "n. 星期；周",
+    "grade": "4B",
+    "unit": "Unit8",
+    "emoji": "📅"
+  },
+  {
+    "word": "Monday",
+    "meaning": "n. 星期一",
+    "grade": "4B",
+    "unit": "Unit8",
+    "emoji": "📅"
+  },
+  {
+    "word": "Tuesday",
+    "meaning": "n. 星期二",
+    "grade": "4B",
+    "unit": "Unit8",
+    "emoji": "📅"
+  },
+  {
+    "word": "Wednesday",
+    "meaning": "n. 星期三",
+    "grade": "4B",
+    "unit": "Unit8",
+    "emoji": "📅"
+  },
+  {
+    "word": "Thursday",
+    "meaning": "n. 星期四",
+    "grade": "4B",
+    "unit": "Unit8",
+    "emoji": "📅"
+  },
+  {
+    "word": "Friday",
+    "meaning": "n. 星期五",
+    "grade": "4B",
+    "unit": "Unit8",
+    "emoji": "📅"
+  },
+  {
+    "word": "Saturday",
+    "meaning": "n. 星期六",
+    "grade": "4B",
+    "unit": "Unit8",
+    "emoji": "📅"
+  },
+  {
+    "word": "Sunday",
+    "meaning": "n. 星期天",
+    "grade": "4B",
+    "unit": "Unit8",
+    "emoji": "📅"
+  },
+  {
+    "word": "game",
+    "meaning": "n. 游戏",
+    "grade": "4B",
+    "unit": "Unit8",
+    "emoji": "🎮"
+  },
+  {
+    "word": "clock",
+    "meaning": "n. 时钟；钟",
+    "grade": "4B",
+    "unit": "Unit8",
+    "emoji": "🕰️"
+  },
+  {
+    "word": "China",
+    "meaning": "n. 中国",
+    "grade": "4B",
+    "unit": "Unit9",
+    "emoji": "🇨🇳"
+  },
+  {
+    "word": "talk",
+    "meaning": "v. 谈话；说话",
+    "grade": "4B",
+    "unit": "Unit9",
+    "emoji": "💬"
+  },
+  {
+    "word": "January",
+    "meaning": "n. 一月",
+    "grade": "4B",
+    "unit": "Unit9",
+    "emoji": "❄️"
+  },
+  {
+    "word": "February",
+    "meaning": "n. 二月",
+    "grade": "4B",
+    "unit": "Unit9",
+    "emoji": "💝"
+  },
+  {
+    "word": "March",
+    "meaning": "n. 三月",
+    "grade": "4B",
+    "unit": "Unit9",
+    "emoji": "🌸"
+  },
+  {
+    "word": "April",
+    "meaning": "n. 四月",
+    "grade": "4B",
+    "unit": "Unit9",
+    "emoji": "🌧️"
+  },
+  {
+    "word": "May",
+    "meaning": "n. 五月",
+    "grade": "4B",
+    "unit": "Unit9",
+    "emoji": "🌹"
+  },
+  {
+    "word": "June",
+    "meaning": "n. 六月",
+    "grade": "4B",
+    "unit": "Unit9",
+    "emoji": "☀️"
+  },
+  {
+    "word": "July",
+    "meaning": "n. 七月",
+    "grade": "4B",
+    "unit": "Unit9",
+    "emoji": "🏖️"
+  },
+  {
+    "word": "August",
+    "meaning": "n. 八月",
+    "grade": "4B",
+    "unit": "Unit9",
+    "emoji": "🌻"
+  },
+  {
+    "word": "September",
+    "meaning": "n. 九月",
+    "grade": "4B",
+    "unit": "Unit9",
+    "emoji": "🍂"
+  },
+  {
+    "word": "October",
+    "meaning": "n. 十月",
+    "grade": "4B",
+    "unit": "Unit9",
+    "emoji": "🎃"
+  },
+  {
+    "word": "November",
+    "meaning": "n. 十一月",
+    "grade": "4B",
+    "unit": "Unit9",
+    "emoji": "🍁"
+  },
+  {
+    "word": "December",
+    "meaning": "n. 十二月",
+    "grade": "4B",
+    "unit": "Unit9",
+    "emoji": "🎄"
+  },
+  {
+    "word": "email",
+    "meaning": "n. 电子邮件",
+    "grade": "4B",
+    "unit": "Unit9",
+    "emoji": "📧"
+  },
+  {
+    "word": "hat",
+    "meaning": "n. 帽子",
+    "grade": "4B",
+    "unit": "Unit9",
+    "emoji": "🎩"
+  },
+  {
+    "word": "wear",
+    "meaning": "v. 穿；戴",
+    "grade": "4B",
+    "unit": "Unit9",
+    "emoji": "👕"
+  },
+  {
+    "word": "garden",
+    "meaning": "n. 花园",
+    "grade": "4B",
+    "unit": "Unit10",
+    "emoji": "🌷"
+  },
+  {
+    "word": "plant",
+    "meaning": "n. 植物 v. 种植",
+    "grade": "4B",
+    "unit": "Unit10",
+    "emoji": "🌱"
+  },
+  {
+    "word": "leaf",
+    "meaning": "n. 叶子",
+    "grade": "4B",
+    "unit": "Unit10",
+    "emoji": "🍃"
+  },
+  {
+    "word": "water",
+    "meaning": "v. 给……浇水 n. 水",
+    "grade": "4B",
+    "unit": "Unit10",
+    "emoji": "💧"
+  },
+  {
+    "word": "grow",
+    "meaning": "v.（使）生长；成长",
+    "grade": "4B",
+    "unit": "Unit10",
+    "emoji": "🌱"
+  },
+  {
+    "word": "seed",
+    "meaning": "n. 种子",
+    "grade": "4B",
+    "unit": "Unit10",
+    "emoji": "🌰"
+  },
+  {
+    "word": "song",
+    "meaning": "n. 歌曲",
+    "grade": "4B",
+    "unit": "Unit11",
+    "emoji": "🎵"
+  },
+  {
+    "word": "zoo",
+    "meaning": "n. 动物园",
+    "grade": "4B",
+    "unit": "Unit11",
+    "emoji": "🦁"
+  },
+  {
+    "word": "cinema",
+    "meaning": "n. 电影院",
+    "grade": "4B",
+    "unit": "Unit11",
+    "emoji": "🎬"
+  },
+  {
+    "word": "museum",
+    "meaning": "n. 博物馆",
+    "grade": "4B",
+    "unit": "Unit11",
+    "emoji": "🏛️"
+  },
+  {
+    "word": "also",
+    "meaning": "adv. 也；还",
+    "grade": "4B",
+    "unit": "Unit11",
+    "emoji": "➕"
+  },
+  {
+    "word": "ugly",
+    "meaning": "adj. 丑的；丑陋的",
+    "grade": "4B",
+    "unit": "Unit12",
+    "emoji": "👹"
+  },
+  {
+    "word": "duckling",
+    "meaning": "n. 小鸭",
+    "grade": "4B",
+    "unit": "Unit12",
+    "emoji": "🦆"
+  },
+  {
+    "word": "duck",
+    "meaning": "n. 鸭子",
+    "grade": "4B",
+    "unit": "Unit12",
+    "emoji": "🦆"
+  },
+  {
+    "word": "river",
+    "meaning": "n. 河；江",
+    "grade": "4B",
+    "unit": "Unit12",
+    "emoji": "🏞️"
+  },
+  {
+    "word": "baby",
+    "meaning": "n. 宝宝；婴儿",
+    "grade": "4B",
+    "unit": "Unit12",
+    "emoji": "👶"
+  },
+  {
+    "word": "later",
+    "meaning": "adv. 后来；以后",
+    "grade": "4B",
+    "unit": "Unit12",
+    "emoji": "⏩"
+  },
+  {
+    "word": "swan",
+    "meaning": "n. 天鹅",
+    "grade": "4B",
+    "unit": "Unit12",
+    "emoji": "🦢"
+  },
+  {
+    "word": "into",
+    "meaning": "prep. 朝；向；到……里面",
+    "grade": "4B",
+    "unit": "Unit12",
+    "emoji": "➡️"
+  },
+  {
+    "word": "future",
+    "meaning": "n. 将来；未来",
+    "grade": "5A",
+    "unit": "Unit1",
+    "emoji": "🔮"
+  },
+  {
+    "word": "pilot",
+    "meaning": "n. 飞行员",
+    "grade": "5A",
+    "unit": "Unit1",
+    "emoji": "👨‍✈️"
+  },
+  {
+    "word": "cook",
+    "meaning": "n. 厨师 v. 烹饪",
+    "grade": "5A",
+    "unit": "Unit1",
+    "emoji": "👨‍🍳"
+  },
+  {
+    "word": "taxi",
+    "meaning": "n. 出租车",
+    "grade": "5A",
+    "unit": "Unit1",
+    "emoji": "🚕"
+  },
+  {
+    "word": "station",
+    "meaning": "n. 车站",
+    "grade": "5A",
+    "unit": "Unit1",
+    "emoji": "🚉"
+  },
+  {
+    "word": "hour",
+    "meaning": "n. 小时",
+    "grade": "5A",
+    "unit": "Unit1",
+    "emoji": "⏰"
+  },
+  {
+    "word": "singer",
+    "meaning": "n. 歌手",
+    "grade": "5A",
+    "unit": "Unit1",
+    "emoji": "🎤"
+  },
+  {
+    "word": "lifeguard",
+    "meaning": "n. 救生员",
+    "grade": "5A",
+    "unit": "Unit1",
+    "emoji": "🏊"
+  },
+  {
+    "word": "save",
+    "meaning": "v. 救；救助；节约",
+    "grade": "5A",
+    "unit": "Unit1",
+    "emoji": "🦸"
+  },
+  {
+    "word": "become",
+    "meaning": "v. 变成；变得",
+    "grade": "5A",
+    "unit": "Unit1",
+    "emoji": "✨"
+  },
+  {
+    "word": "journey",
+    "meaning": "n. 旅程；旅行",
+    "grade": "5A",
+    "unit": "Unit2",
+    "emoji": "✈️"
+  },
+  {
+    "word": "primary",
+    "meaning": "adj. 初级的；小学的",
+    "grade": "5A",
+    "unit": "Unit2",
+    "emoji": "🏫"
+  },
+  {
+    "word": "party",
+    "meaning": "n. 聚会；派对",
+    "grade": "5A",
+    "unit": "Unit3",
+    "emoji": "🎉"
+  },
+  {
+    "word": "when",
+    "meaning": "adv. 什么时候",
+    "grade": "5A",
+    "unit": "Unit3",
+    "emoji": "⏰"
+  },
+  {
+    "word": "begin",
+    "meaning": "v. 开始",
+    "grade": "5A",
+    "unit": "Unit3",
+    "emoji": "🚀"
+  },
+  {
+    "word": "bring",
+    "meaning": "v. 带来",
+    "grade": "5A",
+    "unit": "Unit3",
+    "emoji": "🎒"
+  },
+  {
+    "word": "thing",
+    "meaning": "n. 东西；事物",
+    "grade": "5A",
+    "unit": "Unit3",
+    "emoji": "📦"
+  },
+  {
+    "word": "favorite",
+    "meaning": "adj. 最喜欢的",
+    "grade": "5A",
+    "unit": "Unit3",
+    "emoji": "❤️"
+  },
+  {
+    "word": "interesting",
+    "meaning": "adj. 有趣的",
+    "grade": "5A",
+    "unit": "Unit3",
+    "emoji": "😄"
+  },
+  {
+    "word": "usually",
+    "meaning": "adv. 通常",
+    "grade": "5A",
+    "unit": "Unit4",
+    "emoji": "🔄"
+  },
+  {
+    "word": "often",
+    "meaning": "adv. 经常",
+    "grade": "5A",
+    "unit": "Unit4",
+    "emoji": "📊"
+  },
+  {
+    "word": "visit",
+    "meaning": "v. 看望；拜访；参观",
+    "grade": "5A",
+    "unit": "Unit4",
+    "emoji": "👨‍👩‍👧"
+  },
+  {
+    "word": "sometimes",
+    "meaning": "adv. 有时",
+    "grade": "5A",
+    "unit": "Unit4",
+    "emoji": "⏳"
+  },
+  {
+    "word": "always",
+    "meaning": "adv. 总是；一直",
+    "grade": "5A",
+    "unit": "Unit4",
+    "emoji": "♾️"
+  },
+  {
+    "word": "never",
+    "meaning": "adv. 从不",
+    "grade": "5A",
+    "unit": "Unit4",
+    "emoji": "🚫"
+  },
+  {
+    "word": "clever",
+    "meaning": "adj. 聪明的",
+    "grade": "5A",
+    "unit": "Unit5",
+    "emoji": "🧠"
+  },
+  {
+    "word": "same",
+    "meaning": "adj. 相同的",
+    "grade": "5A",
+    "unit": "Unit5",
+    "emoji": "👯"
+  },
+  {
+    "word": "both",
+    "meaning": "pron.（两个）都",
+    "grade": "5A",
+    "unit": "Unit5",
+    "emoji": "✌️"
+  },
+  {
+    "word": "cross",
+    "meaning": "v. 穿越；越过",
+    "grade": "5A",
+    "unit": "Unit5",
+    "emoji": "🚶‍♀️"
+  },
+  {
+    "word": "carry",
+    "meaning": "v. 背；提；拿",
+    "grade": "5A",
+    "unit": "Unit5",
+    "emoji": "💪"
+  },
+  {
+    "word": "heavy",
+    "meaning": "adj. 重的；沉的",
+    "grade": "5A",
+    "unit": "Unit5",
+    "emoji": "🏋️"
+  },
+  {
+    "word": "different",
+    "meaning": "adj. 不同的",
+    "grade": "5A",
+    "unit": "Unit5",
+    "emoji": "🔀"
+  },
+  {
+    "word": "bored",
+    "meaning": "adj. 无聊的",
+    "grade": "5A",
+    "unit": "Unit5",
+    "emoji": "😑"
+  },
+  {
+    "word": "easy",
+    "meaning": "adj. 容易的",
+    "grade": "5A",
+    "unit": "Unit5",
+    "emoji": "😊"
+  },
+  {
+    "word": "answer",
+    "meaning": "v./n. 回答；答案",
+    "grade": "5A",
+    "unit": "Unit5",
+    "emoji": "💬"
+  },
+  {
+    "word": "life",
+    "meaning": "n. 生活",
+    "grade": "5A",
+    "unit": "Unit6",
+    "emoji": "🌟"
+  },
+  {
+    "word": "bedroom",
+    "meaning": "n. 卧室",
+    "grade": "5A",
+    "unit": "Unit6",
+    "emoji": "🛏️"
+  },
+  {
+    "word": "kitchen",
+    "meaning": "n. 厨房",
+    "grade": "5A",
+    "unit": "Unit6",
+    "emoji": "🍳"
+  },
+  {
+    "word": "light",
+    "meaning": "n. 灯；光",
+    "grade": "5A",
+    "unit": "Unit6",
+    "emoji": "💡"
+  },
+  {
+    "word": "watch",
+    "meaning": "v. 观看；观察",
+    "grade": "5A",
+    "unit": "Unit6",
+    "emoji": "👀"
+  },
+  {
+    "word": "before",
+    "meaning": "prep. 在……以前",
+    "grade": "5A",
+    "unit": "Unit6",
+    "emoji": "⏮️"
+  },
+  {
+    "word": "bedtime",
+    "meaning": "n. 就寝时间",
+    "grade": "5A",
+    "unit": "Unit6",
+    "emoji": "😴"
+  },
+  {
+    "word": "homework",
+    "meaning": "n. 家庭作业",
+    "grade": "5A",
+    "unit": "Unit6",
+    "emoji": "📝"
+  },
+  {
+    "word": "story",
+    "meaning": "n. 故事",
+    "grade": "5A",
+    "unit": "Unit6",
+    "emoji": "📖"
+  },
+  {
+    "word": "beach",
+    "meaning": "n. 海滩；沙滩",
+    "grade": "5A",
+    "unit": "Unit7",
+    "emoji": "🏖️"
+  },
+  {
+    "word": "enjoy",
+    "meaning": "v. 享受……的乐趣",
+    "grade": "5A",
+    "unit": "Unit7",
+    "emoji": "😊"
+  },
+  {
+    "word": "sunshine",
+    "meaning": "n. 阳光",
+    "grade": "5A",
+    "unit": "Unit7",
+    "emoji": "☀️"
+  },
+  {
+    "word": "collect",
+    "meaning": "v. 收集",
+    "grade": "5A",
+    "unit": "Unit7",
+    "emoji": "📚"
+  },
+  {
+    "word": "sea",
+    "meaning": "n. 海",
+    "grade": "5A",
+    "unit": "Unit7",
+    "emoji": "🌊"
+  },
+  {
+    "word": "letter",
+    "meaning": "n. 信",
+    "grade": "5A",
+    "unit": "Unit7",
+    "emoji": "✉️"
+  },
+  {
+    "word": "know",
+    "meaning": "v. 知道",
+    "grade": "5A",
+    "unit": "Unit7",
+    "emoji": "🧠"
+  },
+  {
+    "word": "year",
+    "meaning": "n. 年；年岁",
+    "grade": "5A",
+    "unit": "Unit7",
+    "emoji": "📅"
+  },
+  {
+    "word": "vacation",
+    "meaning": "n. 假日；假期",
+    "grade": "5A",
+    "unit": "Unit7",
+    "emoji": "🏖️"
+  },
+  {
+    "word": "subway",
+    "meaning": "n. 地铁",
+    "grade": "5A",
+    "unit": "Unit8",
+    "emoji": "🚇"
+  },
+  {
+    "word": "brush",
+    "meaning": "n. 刷子；画笔 v. 刷",
+    "grade": "5B",
+    "unit": "Unit1",
+    "emoji": "🖌️"
+  },
+  {
+    "word": "paints",
+    "meaning": "n. 绘画颜料",
+    "grade": "5B",
+    "unit": "Unit1",
+    "emoji": "🎨"
+  },
+  {
+    "word": "crayon",
+    "meaning": "n. 蜡笔",
+    "grade": "5B",
+    "unit": "Unit1",
+    "emoji": "🖍️"
+  },
+  {
+    "word": "notebook",
+    "meaning": "n. 笔记本",
+    "grade": "5B",
+    "unit": "Unit1",
+    "emoji": "📓"
+  },
+  {
+    "word": "glue",
+    "meaning": "n. 胶水 v. 粘合",
+    "grade": "5B",
+    "unit": "Unit1",
+    "emoji": "🧴"
+  },
+  {
+    "word": "tape",
+    "meaning": "n. 胶带",
+    "grade": "5B",
+    "unit": "Unit1",
+    "emoji": "📼"
+  },
+  {
+    "word": "cocoon",
+    "meaning": "n. 茧",
+    "grade": "5B",
+    "unit": "Unit2",
+    "emoji": "🐛"
+  },
+  {
+    "word": "caterpillar",
+    "meaning": "n. 毛虫",
+    "grade": "5B",
+    "unit": "Unit2",
+    "emoji": "🐛"
+  },
+  {
+    "word": "puppy",
+    "meaning": "n. 小狗；幼犬",
+    "grade": "5B",
+    "unit": "Unit2",
+    "emoji": "🐶"
+  },
+  {
+    "word": "was",
+    "meaning": "v. be的过去式（单数）",
+    "grade": "5B",
+    "unit": "Unit2",
+    "emoji": "⏳"
+  },
+  {
+    "word": "were",
+    "meaning": "v. be的过去式（复数）",
+    "grade": "5B",
+    "unit": "Unit2",
+    "emoji": "⏳"
+  },
+  {
+    "word": "drill",
+    "meaning": "n. 钻机；训练",
+    "grade": "5B",
+    "unit": "Unit3",
+    "emoji": "🔫"
+  },
+  {
+    "word": "truck",
+    "meaning": "n. 卡车；货车",
+    "grade": "5B",
+    "unit": "Unit3",
+    "emoji": "🚚"
+  },
+  {
+    "word": "motorbike",
+    "meaning": "n. 摩托车",
+    "grade": "5B",
+    "unit": "Unit3",
+    "emoji": "🏍️"
+  },
+  {
+    "word": "outside",
+    "meaning": "adv. 在外面",
+    "grade": "5B",
+    "unit": "Unit3",
+    "emoji": "🏞️"
+  },
+  {
+    "word": "sleep",
+    "meaning": "v. 睡觉",
+    "grade": "5B",
+    "unit": "Unit3",
+    "emoji": "😴"
+  },
+  {
+    "word": "another",
+    "meaning": "pron. 另一个",
+    "grade": "5B",
+    "unit": "Unit3",
+    "emoji": "🔄"
+  },
+  {
+    "word": "heard",
+    "meaning": "v. 听到（hear的过去式）",
+    "grade": "5B",
+    "unit": "Unit3",
+    "emoji": "👂"
+  },
+  {
+    "word": "chicken",
+    "meaning": "n. 鸡肉；小鸡",
+    "grade": "5B",
+    "unit": "Unit4",
+    "emoji": "🍗"
+  },
+  {
+    "word": "pork",
+    "meaning": "n. 猪肉",
+    "grade": "5B",
+    "unit": "Unit4",
+    "emoji": "🥓"
+  },
+  {
+    "word": "beef",
+    "meaning": "n. 牛肉",
+    "grade": "5B",
+    "unit": "Unit4",
+    "emoji": "🥩"
+  },
+  {
+    "word": "fruit",
+    "meaning": "n. 水果",
+    "grade": "5B",
+    "unit": "Unit4",
+    "emoji": "🍎"
+  },
+  {
+    "word": "vegetable",
+    "meaning": "n. 蔬菜",
+    "grade": "5B",
+    "unit": "Unit4",
+    "emoji": "🥦"
+  },
+  {
+    "word": "cabbage",
+    "meaning": "n. 卷心菜；甘蓝",
+    "grade": "5B",
+    "unit": "Unit4",
+    "emoji": "🥬"
+  },
+  {
+    "word": "bean",
+    "meaning": "n. 豆；豆子",
+    "grade": "5B",
+    "unit": "Unit4",
+    "emoji": "🫘"
+  },
+  {
+    "word": "milk",
+    "meaning": "n. 牛奶",
+    "grade": "5B",
+    "unit": "Unit4",
+    "emoji": "🥛"
+  },
+  {
+    "word": "healthy",
+    "meaning": "adj. 健康的",
+    "grade": "5B",
+    "unit": "Unit4",
+    "emoji": "💪"
+  },
+  {
+    "word": "ticket",
+    "meaning": "n. 票",
+    "grade": "5B",
+    "unit": "Unit5",
+    "emoji": "🎫"
+  },
+  {
+    "word": "exit",
+    "meaning": "n. 出口",
+    "grade": "5B",
+    "unit": "Unit5",
+    "emoji": "🚪"
+  },
+  {
+    "word": "entrance",
+    "meaning": "n. 入口",
+    "grade": "5B",
+    "unit": "Unit5",
+    "emoji": "🚪"
+  },
+  {
+    "word": "seat",
+    "meaning": "n. 座位",
+    "grade": "5B",
+    "unit": "Unit5",
+    "emoji": "💺"
+  },
+  {
+    "word": "movie",
+    "meaning": "n. 电影",
+    "grade": "5B",
+    "unit": "Unit5",
+    "emoji": "🎬"
+  },
+  {
+    "word": "funny",
+    "meaning": "adj. 有趣的；滑稽的",
+    "grade": "5B",
+    "unit": "Unit5",
+    "emoji": "😂"
+  },
+  {
+    "word": "princess",
+    "meaning": "n. 公主",
+    "grade": "5B",
+    "unit": "Unit5",
+    "emoji": "👸"
+  },
+  {
+    "word": "telephone",
+    "meaning": "n. 电话",
+    "grade": "5B",
+    "unit": "Unit6",
+    "emoji": "📞"
+  },
+  {
+    "word": "smoking",
+    "meaning": "n. 吸烟；抽烟",
+    "grade": "5B",
+    "unit": "Unit6",
+    "emoji": "🚬"
+  },
+  {
+    "word": "swimming",
+    "meaning": "n. 游泳",
+    "grade": "5B",
+    "unit": "Unit6",
+    "emoji": "🏊"
+  },
+  {
+    "word": "sign",
+    "meaning": "n. 标志；指示牌",
+    "grade": "5B",
+    "unit": "Unit6",
+    "emoji": "🚸"
+  },
+  {
+    "word": "snow",
+    "meaning": "n. 雪 v. 下雪",
+    "grade": "5B",
+    "unit": "Unit7",
+    "emoji": "❄️"
+  },
+  {
+    "word": "snowy",
+    "meaning": "adj. 下雪的；多雪的",
+    "grade": "5B",
+    "unit": "Unit7",
+    "emoji": "🌨️"
+  },
+  {
+    "word": "storm",
+    "meaning": "n. 暴风雨",
+    "grade": "5B",
+    "unit": "Unit7",
+    "emoji": "⛈️"
+  },
+  {
+    "word": "stormy",
+    "meaning": "adj. 暴风雨的",
+    "grade": "5B",
+    "unit": "Unit7",
+    "emoji": "🌪️"
+  },
+  {
+    "word": "fog",
+    "meaning": "n. 雾",
+    "grade": "5B",
+    "unit": "Unit7",
+    "emoji": "🌫️"
+  },
+  {
+    "word": "foggy",
+    "meaning": "adj. 有雾的",
+    "grade": "5B",
+    "unit": "Unit7",
+    "emoji": "🌁"
+  },
+  {
+    "word": "yesterday",
+    "meaning": "n./adv. 昨天",
+    "grade": "5B",
+    "unit": "Unit7",
+    "emoji": "📅"
+  },
+  {
+    "word": "degree",
+    "meaning": "n. 度；度数",
+    "grade": "5B",
+    "unit": "Unit7",
+    "emoji": "🌡️"
+  },
+  {
+    "word": "bookshelf",
+    "meaning": "n. 书架",
+    "grade": "5B",
+    "unit": "Unit8",
+    "emoji": "📚"
+  },
+  {
+    "word": "mirror",
+    "meaning": "n. 镜子",
+    "grade": "5B",
+    "unit": "Unit8",
+    "emoji": "🪞"
+  },
+  {
+    "word": "cushion",
+    "meaning": "n. 垫子",
+    "grade": "5B",
+    "unit": "Unit8",
+    "emoji": "🛋️"
+  },
+  {
+    "word": "cupboard",
+    "meaning": "n. 碗柜；食橱",
+    "grade": "5B",
+    "unit": "Unit8",
+    "emoji": "🗄️"
+  },
+  {
+    "word": "lamp",
+    "meaning": "n. 灯",
+    "grade": "5B",
+    "unit": "Unit8",
+    "emoji": "💡"
+  },
+  {
+    "word": "sofa",
+    "meaning": "n. 沙发",
+    "grade": "5B",
+    "unit": "Unit8",
+    "emoji": "🛋️"
+  },
+  {
+    "word": "furniture",
+    "meaning": "n. 家具",
+    "grade": "5B",
+    "unit": "Unit8",
+    "emoji": "🪑"
+  },
+  {
+    "word": "next",
+    "meaning": "adv. 然后；下次",
+    "grade": "5B",
+    "unit": "Unit8",
+    "emoji": "➡️"
+  },
+  {
+    "word": "move",
+    "meaning": "v. 移动；搬家",
+    "grade": "5B",
+    "unit": "Unit8",
+    "emoji": "📦"
+  },
+  {
+    "word": "window",
+    "meaning": "n. 窗；窗户",
+    "grade": "5B",
+    "unit": "Unit8",
+    "emoji": "🪟"
+  },
+  {
+    "word": "wall",
+    "meaning": "n. 墙壁",
+    "grade": "5B",
+    "unit": "Unit8",
+    "emoji": "🧱"
+  },
+  {
+    "word": "museum",
+    "meaning": "n. 博物馆",
+    "grade": "5B",
+    "unit": "Unit9",
+    "emoji": "🏛️"
+  },
+  {
+    "word": "perform",
+    "meaning": "v. 表演；演奏",
+    "grade": "5B",
+    "unit": "Unit9",
+    "emoji": "🎭"
+  },
+  {
+    "word": "dance",
+    "meaning": "v. 跳舞",
+    "grade": "5B",
+    "unit": "Unit9",
+    "emoji": "💃"
+  },
+  {
+    "word": "useful",
+    "meaning": "adj. 有用的",
+    "grade": "5B",
+    "unit": "Unit9",
+    "emoji": "🔧"
+  },
+  {
+    "word": "really",
+    "meaning": "adv. 真正地；实际上",
+    "grade": "5B",
+    "unit": "Unit9",
+    "emoji": "❗"
+  },
+  {
+    "word": "Christmas",
+    "meaning": "n. 圣诞节",
+    "grade": "5B",
+    "unit": "Unit10",
+    "emoji": "🎄"
+  },
+  {
+    "word": "Easter",
+    "meaning": "n. 复活节",
+    "grade": "5B",
+    "unit": "Unit10",
+    "emoji": "🐰"
+  },
+  {
+    "word": "Halloween",
+    "meaning": "n. 万圣节前夕",
+    "grade": "5B",
+    "unit": "Unit10",
+    "emoji": "🎃"
+  },
+  {
+    "word": "Thanksgiving",
+    "meaning": "n. 感恩节",
+    "grade": "5B",
+    "unit": "Unit10",
+    "emoji": "🦃"
+  },
+  {
+    "word": "find",
+    "meaning": "v. 找到；发现",
+    "grade": "5B",
+    "unit": "Unit10",
+    "emoji": "🔍"
+  },
+  {
+    "word": "hide",
+    "meaning": "v. 隐藏；躲藏",
+    "grade": "5B",
+    "unit": "Unit10",
+    "emoji": "🙈"
+  },
+  {
+    "word": "present",
+    "meaning": "n. 礼物",
+    "grade": "5B",
+    "unit": "Unit10",
+    "emoji": "🎁"
+  },
+  {
+    "word": "giant",
+    "meaning": "n. 巨人 adj. 巨大的",
+    "grade": "5B",
+    "unit": "Unit11",
+    "emoji": "🧌"
+  },
+  {
+    "word": "kind",
+    "meaning": "adj. 友好的；体贴的",
+    "grade": "5B",
+    "unit": "Unit11",
+    "emoji": "💝"
+  },
+  {
+    "word": "through",
+    "meaning": "prep. 穿过；通过",
+    "grade": "5B",
+    "unit": "Unit11",
+    "emoji": "➡️"
+  },
+  {
+    "word": "village",
+    "meaning": "n. 村庄",
+    "grade": "5B",
+    "unit": "Unit11",
+    "emoji": "🏘️"
+  },
+  {
+    "word": "mooncake",
+    "meaning": "n. 月饼",
+    "grade": "5B",
+    "unit": "Unit11",
+    "emoji": "🥮"
+  },
+  {
+    "word": "firecracker",
+    "meaning": "n. 鞭炮；爆竹",
+    "grade": "5B",
+    "unit": "Unit11",
+    "emoji": "🧨"
+  },
+  {
+    "word": "relative",
+    "meaning": "n. 亲戚",
+    "grade": "5B",
+    "unit": "Unit11",
+    "emoji": "👨‍👩‍👧"
+  },
+  {
+    "word": "dumpling",
+    "meaning": "n. 饺子",
+    "grade": "5B",
+    "unit": "Unit11",
+    "emoji": "🥟"
+  },
+  {
+    "word": "important",
+    "meaning": "adj. 重要的",
+    "grade": "5B",
+    "unit": "Unit11",
+    "emoji": "⭐"
+  },
+  {
+    "word": "festival",
+    "meaning": "n. 节日",
+    "grade": "5B",
+    "unit": "Unit11",
+    "emoji": "🎉"
+  },
+  {
+    "word": "craft",
+    "meaning": "n. 手艺；工艺",
+    "grade": "5B",
+    "unit": "Unit12",
+    "emoji": "🎨"
+  },
+  {
+    "word": "crown",
+    "meaning": "n. 王冠；皇冠",
+    "grade": "5B",
+    "unit": "Unit12",
+    "emoji": "👑"
+  },
+  {
+    "word": "scissors",
+    "meaning": "n. 剪刀",
+    "grade": "5B",
+    "unit": "Unit12",
+    "emoji": "✂️"
+  },
+  {
+    "word": "saw",
+    "meaning": "n. 锯 v. 看见（过去式）",
+    "grade": "5B",
+    "unit": "Unit12",
+    "emoji": "🪚"
+  },
+  {
+    "word": "craftsman",
+    "meaning": "n. 工匠；手艺人",
+    "grade": "5B",
+    "unit": "Unit12",
+    "emoji": "👨‍🔧"
+  },
+  {
+    "word": "tool",
+    "meaning": "n. 工具",
+    "grade": "5B",
+    "unit": "Unit12",
+    "emoji": "🔧"
+  },
+  {
+    "word": "easily",
+    "meaning": "adv. 容易地",
+    "grade": "5B",
+    "unit": "Unit12",
+    "emoji": "😊"
+  },
+  {
+    "word": "himself",
+    "meaning": "pron. 他自己",
+    "grade": "5B",
+    "unit": "Unit12",
+    "emoji": "👨"
+  },
+  {
+    "word": "still",
+    "meaning": "adv. 仍然",
+    "grade": "5B",
+    "unit": "Unit12",
+    "emoji": "⏳"
+  },
+  {
+    "word": "model",
+    "meaning": "n. 模型",
+    "grade": "5B",
+    "unit": "Unit12",
+    "emoji": "🚗"
+  }
+]
