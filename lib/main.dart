@@ -676,7 +676,7 @@ class ProfilePage extends StatelessWidget {
 
   // 检查更新
   void _checkUpdate(BuildContext context) async {
-    const String currentVersion = '1.1.0';
+    const String currentVersion = '1.1.1';
     const String repo = 'alanfoxye/oxford-word-game';
 
     // 显示加载对话框
@@ -2051,101 +2051,106 @@ class _FillInBlankPageState extends State<FillInBlankPage>
                           ),
                         ),
                       ),
-                      // 大炮（只在第一个空格位置显示，从底部往上升）
-                      if (isBlank && blankIndex == 0)
-                        Positioned(
-                          bottom: 0,
-                          child: AnimatedBuilder(
-                            animation: _cannonController,
-                            builder: (context, child) {
-                              final riseHeight = _cannonController.value * 55;
-                              return SizedBox(
-                                height: 60,
-                                child: Align(
-                                  alignment: Alignment.bottomCenter,
-                                  child: Column(
-                                    mainAxisAlignment: MainAxisAlignment.end,
-                                    children: [
-                                      // 炮管
-                                      Container(
-                                        width: 36,
-                                        height: riseHeight,
-                                        decoration: BoxDecoration(
-                                          gradient: LinearGradient(
-                                            begin: Alignment.topCenter,
-                                            end: Alignment.bottomCenter,
-                                            colors: [Colors.grey[800]!, Colors.grey[600]!],
-                                          ),
-                                          borderRadius: const BorderRadius.only(
-                                            topLeft: Radius.circular(6),
-                                            topRight: Radius.circular(6),
-                                          ),
-                                          border: Border.all(color: Colors.grey[900]!, width: 2),
-                                        ),
-                                        child: _cannonController.value > 0.7
-                                            ? Align(
-                                                alignment: Alignment.topCenter,
-                                                child: Container(
-                                                  width: 28,
-                                                  height: 10,
-                                                  margin: const EdgeInsets.only(top: 2),
-                                                  decoration: BoxDecoration(
-                                                    color: Colors.black,
-                                                    borderRadius: BorderRadius.circular(3),
-                                                  ),
-                                                ),
-                                              )
-                                            : null,
-                                      ),
-                                      // 炮座
-                                      if (_cannonController.value > 0.3)
-                                        Container(
-                                          width: 50,
-                                          height: 12,
-                                          decoration: BoxDecoration(
-                                            color: Colors.grey[700],
-                                            borderRadius: BorderRadius.circular(4),
-                                            border: Border.all(color: Colors.grey[900]!, width: 2),
-                                          ),
-                                        ),
-                                      // 轮子
-                                      if (_cannonController.value > 0.5)
-                                        Row(
-                                          mainAxisAlignment: MainAxisAlignment.center,
-                                          children: [
-                                            Container(
-                                              width: 14,
-                                              height: 14,
-                                              decoration: BoxDecoration(
-                                                color: Colors.grey[800],
-                                                shape: BoxShape.circle,
-                                                border: Border.all(color: Colors.grey[900]!, width: 2),
-                                              ),
-                                            ),
-                                            const SizedBox(width: 22),
-                                            Container(
-                                              width: 14,
-                                              height: 14,
-                                              decoration: BoxDecoration(
-                                                color: Colors.grey[800],
-                                                shape: BoxShape.circle,
-                                                border: Border.all(color: Colors.grey[900]!, width: 2),
-                                              ),
-                                            ),
-                                          ],
-                                        ),
-                                    ],
-                                  ),
-                                ),
-                              );
-                            },
-                          ),
-                        ),
+
                     ],
                   ),
                 ),
               );
             }),
+          ),
+          // 大炮（在单词正中间，从底部往上升）
+          Positioned(
+            bottom: 0,
+            left: 0,
+            right: 0,
+            child: Center(
+              child: AnimatedBuilder(
+                animation: _cannonController,
+                builder: (context, child) {
+                  final riseHeight = _cannonController.value * 55;
+                  return SizedBox(
+                    height: 60,
+                    width: 50,
+                    child: Align(
+                      alignment: Alignment.bottomCenter,
+                      child: Column(
+                        mainAxisAlignment: MainAxisAlignment.end,
+                        children: [
+                          // 炮管
+                          Container(
+                            width: 36,
+                            height: riseHeight,
+                            decoration: BoxDecoration(
+                              gradient: LinearGradient(
+                                begin: Alignment.topCenter,
+                                end: Alignment.bottomCenter,
+                                colors: [Colors.grey[800]!, Colors.grey[600]!],
+                              ),
+                              borderRadius: const BorderRadius.only(
+                                topLeft: Radius.circular(6),
+                                topRight: Radius.circular(6),
+                              ),
+                              border: Border.all(color: Colors.grey[900]!, width: 2),
+                            ),
+                            child: _cannonController.value > 0.7
+                                ? Align(
+                                    alignment: Alignment.topCenter,
+                                    child: Container(
+                                      width: 28,
+                                      height: 10,
+                                      margin: const EdgeInsets.only(top: 2),
+                                      decoration: BoxDecoration(
+                                        color: Colors.black,
+                                        borderRadius: BorderRadius.circular(3),
+                                      ),
+                                    ),
+                                  )
+                                : null,
+                          ),
+                          // 炮座
+                          if (_cannonController.value > 0.3)
+                            Container(
+                              width: 50,
+                              height: 12,
+                              decoration: BoxDecoration(
+                                color: Colors.grey[700],
+                                borderRadius: BorderRadius.circular(4),
+                                border: Border.all(color: Colors.grey[900]!, width: 2),
+                              ),
+                            ),
+                          // 轮子
+                          if (_cannonController.value > 0.5)
+                            Row(
+                              mainAxisAlignment: MainAxisAlignment.center,
+                              children: [
+                                Container(
+                                  width: 14,
+                                  height: 14,
+                                  decoration: BoxDecoration(
+                                    color: Colors.grey[800],
+                                    shape: BoxShape.circle,
+                                    border: Border.all(color: Colors.grey[900]!, width: 2),
+                                  ),
+                                ),
+                                const SizedBox(width: 22),
+                                Container(
+                                  width: 14,
+                                  height: 14,
+                                  decoration: BoxDecoration(
+                                    color: Colors.grey[800],
+                                    shape: BoxShape.circle,
+                                    border: Border.all(color: Colors.grey[900]!, width: 2),
+                                  ),
+                                ),
+                              ],
+                            ),
+                        ],
+                      ),
+                    ),
+                  );
+                },
+              ),
+            ),
           ),
         ],
       ),
