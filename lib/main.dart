@@ -3303,6 +3303,20 @@ class _GamePageState extends State<GamePage> with TickerProviderStateMixin {
   late AnimationController _bounceController;
   late Animation<double> _bounceAnimation;
 
+  // TTS 发音通道（与错词本共用）
+  static const _ttsPlatform = MethodChannel('com.example.oxford_word_game/tts');
+
+  Future<void> _speakWord(String word) async {
+    try {
+      await _ttsPlatform.invokeMethod('speak', {
+        'text': word,
+        'rate': LearningStats().ttsSpeechRate,
+      });
+    } catch (e) {
+      // 忽略 TTS 错误
+    }
+  }
+
   @override
   void initState() {
     super.initState();
@@ -3650,19 +3664,41 @@ class _GamePageState extends State<GamePage> with TickerProviderStateMixin {
                               ),
                             const SizedBox(height: 24),
 
-                            // 单词显示
-                            Text(
-                              currentWord.word,
-                              style: TextStyle(
-                                fontSize: 42,
-                                fontWeight: FontWeight.bold,
-                                color: _showResult
-                                    ? (_correctAnswer
-                                        ? Colors.green[800]
-                                        : Colors.red[800])
-                                    : Colors.deepPurple[900],
-                                letterSpacing: 2,
-                              ),
+                            // 单词 + 发音喇叭
+                            Row(
+                              mainAxisSize: MainAxisSize.min,
+                              children: [
+                                Text(
+                                  currentWord.word,
+                                  style: TextStyle(
+                                    fontSize: 42,
+                                    fontWeight: FontWeight.bold,
+                                    color: _showResult
+                                        ? (_correctAnswer
+                                            ? Colors.green[800]
+                                            : Colors.red[800])
+                                        : Colors.deepPurple[900],
+                                    letterSpacing: 2,
+                                  ),
+                                ),
+                                const SizedBox(width: 12),
+                                GestureDetector(
+                                  onTap: () => _speakWord(currentWord.word),
+                                  child: Container(
+                                    width: 40,
+                                    height: 40,
+                                    decoration: BoxDecoration(
+                                      color: Colors.deepPurple.withOpacity(0.15),
+                                      shape: BoxShape.circle,
+                                    ),
+                                    child: Icon(
+                                      Icons.volume_up_rounded,
+                                      color: Colors.deepPurple[400],
+                                      size: 26,
+                                    ),
+                                  ),
+                                ),
+                              ],
                             ),
                             const SizedBox(height: 16),
 
