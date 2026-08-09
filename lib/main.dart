@@ -676,7 +676,7 @@ class ProfilePage extends StatelessWidget {
 
   // 检查更新
   void _checkUpdate(BuildContext context) async {
-    const String currentVersion = '1.0.0';
+    const String currentVersion = '1.1.0';
     const String repo = 'alanfoxye/oxford-word-game';
 
     // 显示加载对话框
